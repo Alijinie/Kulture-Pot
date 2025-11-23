@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoruba Kingdoms - Heritage & History</title>
+    <link rel="stylesheet" href="templatemo-prism-flux.css">
+    
+    <style>
+        /* --- EXISTING MODAL STYLES (Keep these) --- */
+.skills-hexagon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; padding: 20px; }
+.kingdom-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(10px); cursor: pointer; position: relative; overflow: hidden; }
+.kingdom-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan, #00f2ff); box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1); }
+.kingdom-title { color: #fff; font-size: 1.4rem; margin-bottom: 10px; font-weight: bold; }
+.monarch-title { color: var(--accent-cyan, #00f2ff); font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+.card-btn { display: inline-block; padding: 8px 20px; background: transparent; border: 1px solid var(--accent-purple, #bc13fe); color: #fff; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; transition: 0.3s; }
+.kingdom-card:hover .card-btn { background: var(--accent-purple, #bc13fe); }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.modal-content { background: #111; border: 1px solid var(--accent-cyan, #00f2ff); width: 90%; max-width: 600px; border-radius: 20px; padding: 40px; position: relative; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: modalSlide 0.4s ease-out; }
+@keyframes modalSlide { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close-modal { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 30px; cursor: pointer; line-height: 1; }
+.modal-header h2 { color: #fff; margin-bottom: 5px; }
+.modal-header h4 { color: var(--accent-purple, #bc13fe); margin-bottom: 20px; font-weight: 400; }
+.modal-body ul { list-style-type: none; padding: 0; }
+.modal-body li { color: #ccc; margin-bottom: 12px; padding-left: 20px; position: relative; line-height: 1.6; }
+.modal-body li::before { content: "▹"; color: var(--accent-cyan, #00f2ff); position: absolute; left: 0; }
+
+/* --- NEW 3D COVERFLOW HERO STYLES --- */
+.hero {
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Essential for 3D effect */
+}
+
+.coverflow-scene {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.coverflow-item {
+    position: absolute;
+    width: 300px;
+    height: 420px;
+    background: linear-gradient(145deg, #1e1e1e, #0a0a0a);
+    border: 2px solid #333;
+    border-radius: 15px;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Fluid easing */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* Reflection effect */
+    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, rgba(0,0,0,0.4));
+}
+
+/* Content inside the Hero Cards */
+.cf-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+    z-index: 1;
+}
+
+.cf-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    border-top: 1px solid var(--accent-cyan);
+}
+
+.cf-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.cf-subtitle {
+    color: var(--accent-purple);
+    font-size: 0.9rem;
+}
+
+/* STATES for the 3D Rotation */
+/* Center Item (The "Emperor") */
+.coverflow-item.active {
+    transform: translateX(0) translateZ(200px) rotateY(0deg);
+    z-index: 10;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+    filter: brightness(1.2);
+}
+.coverflow-item.active .cf-image { opacity: 1; }
+
+/* Right Side Items */
+.coverflow-item.next {
+    transform: translateX(350px) translateZ(0px) rotateY(-45deg);
+    z-index: 5;
+    filter: brightness(0.6);
+}
+.coverflow-item.next-2 {
+    transform: translateX(600px) translateZ(-200px) rotateY(-60deg);
+    z-index: 2;
+    filter: brightness(0.4);
+    opacity: 0.7;
+}
+
+/* Left Side Items */
+.coverflow-item.prev {
+    transform: translateX(-350px) translateZ(0px) rotateY(45deg);
+    z-index: 5;
+    filter: brightness(0.6);
+}
+.coverflow-item.prev-2 {
+    transform: translateX(-600px) translateZ(-200px) rotateY(60deg);
+    z-index: 2;
+    filter: brightness(0.4);
+    opacity: 0.7;
+}
+
+/* Hidden items (behind) */
+.coverflow-item.hidden {
+    transform: translateZ(-400px);
+    opacity: 0;
+    z-index: 0;
+}
+
+.hero-overlay-text {
+    position: absolute;
+    bottom: 10%;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+}
+/* Style for the Grid Card Images */
+.card-img-top {
+    width: 100%;
+    height: 300px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures image covers area without stretching */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--accent-purple);
+}
+
+/* Style for the Large Modal Image */
+.modal-hero-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--accent-cyan);
+    display: none; /* Hidden by default until loaded */
+}
+
+/* Ensure image shows when src is present */
+.modal-hero-image[src] {
+    display: block;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Large tablets / small desktops */
+@media (max-width: 1024px) {
+    .hero { perspective: 900px; }
+    .coverflow-scene { height: 360px; }
+    .coverflow-item { width: 260px; height: 380px; }
+    .coverflow-item.active { transform: translateX(0) translateZ(160px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(260px) translateZ(0px) rotateY(-38deg); }
+    .coverflow-item.next-2 { transform: translateX(460px) translateZ(-160px) rotateY(-52deg); }
+    .coverflow-item.prev { transform: translateX(-260px) translateZ(0px) rotateY(38deg); }
+    .coverflow-item.prev-2 { transform: translateX(-460px) translateZ(-160px) rotateY(52deg); }
+    .card-img-top { height: 260px; }
+    .modal-hero-image { height: 220px; }
+}
+
+/* Tablets and large phones */
+@media (max-width: 768px) {
+    .hero { height: 70vh; padding: 30px 10px; perspective: 800px; }
+    .coverflow-scene { height: 320px; }
+    .coverflow-item { width: 220px; height: 320px; padding: 14px; border-radius: 12px; }
+    .cf-content { padding: 12px; }
+    .cf-title { font-size: 1rem; }
+    .cf-subtitle { font-size: 0.8rem; }
+
+    .coverflow-item.active { transform: translateX(0) translateZ(140px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(180px) translateZ(0px) rotateY(-32deg); }
+    .coverflow-item.next-2 { transform: translateX(320px) translateZ(-120px) rotateY(-46deg); }
+    .coverflow-item.prev { transform: translateX(-180px) translateZ(0px) rotateY(32deg); }
+    .coverflow-item.prev-2 { transform: translateX(-320px) translateZ(-120px) rotateY(46deg); }
+    .coverflow-item.hidden { transform: translateZ(-300px); }
+
+    .card-img-top { height: 220px; }
+    .modal-hero-image { height: 200px; }
+
+    /* Grid adjustments */
+    .skills-hexagon-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; padding: 16px; }
+    .kingdom-card { padding: 18px; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .hero { height: 60vh; perspective: 600px; }
+    .coverflow-scene { height: 260px; }
+    .coverflow-item { width: 180px; height: 260px; padding: 10px; border-radius: 10px; }
+    .cf-content { padding: 10px; }
+    .cf-title { font-size: 0.95rem; }
+    .cf-subtitle { font-size: 0.75rem; }
+
+    .coverflow-item.active { transform: translateX(0) translateZ(120px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(120px) translateZ(0px) rotateY(-28deg); }
+    .coverflow-item.next-2 { transform: translateX(220px) translateZ(-90px) rotateY(-40deg); }
+    .coverflow-item.prev { transform: translateX(-120px) translateZ(0px) rotateY(28deg); }
+    .coverflow-item.prev-2 { transform: translateX(-220px) translateZ(-90px) rotateY(40deg); }
+    .coverflow-item.hidden { transform: translateZ(-220px); opacity: 0; }
+
+    .card-img-top { height: 160px; }
+    .modal-hero-image { height: 150px; }
+
+    /* Modal/content sizing for small screens */
+    .modal-content { width: 95%; max-width: 420px; padding: 20px; border-radius: 14px; }
+    .modal-header h2 { font-size: 1.1rem; }
+    .modal-header h4 { font-size: 0.9rem; }
+
+    /* Grid to single column */
+    .skills-hexagon-grid { grid-template-columns: 1fr; gap: 14px; padding: 12px; }
+    .kingdom-card { padding: 14px; font-size: 0.95rem; }
+
+    /* Reduce heavy shadows/reflections for performance on low-end devices */
+    .coverflow-item { -webkit-box-reflect: none; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+}
+
+/* Very large screens - increase presence */
+@media (min-width: 1400px) {
+    .coverflow-scene { height: 520px; }
+    .coverflow-item { width: 360px; height: 500px; }
+    .coverflow-item.active { transform: translateX(0) translateZ(260px); }
+    .coverflow-item.next { transform: translateX(420px) translateZ(0px) rotateY(-48deg); }
+    .coverflow-item.next-2 { transform: translateX(720px) translateZ(-240px) rotateY(-62deg); }
+    .coverflow-item.prev { transform: translateX(-420px) translateZ(0px) rotateY(48deg); }
+    .coverflow-item.prev-2 { transform: translateX(-720px) translateZ(-240px) rotateY(62deg); }
+    .card-img-top { height: 360px; }
+    .modal-hero-image { height: 300px; }
+}
+
+.skills-container {
+    background-image: url("images/back3.png");
+    background-size: 400px;
+    
+}
+
+</style>
+    
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-prism">
+                <div class="prism-face"></div>
+                <div class="prism-face"></div>
+                <div class="prism-face"></div>
+            </div>
+            <div style="color: var(--accent-purple); font-size: 18px; text-transform: uppercase; letter-spacing: 3px;">Loading History...</div>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-prism">
+                        <div class="prism-shape"></div>
+                    </div>
+                </div>
+                <span class="logo-text">
+                    <span class="prism">EXPLORE NIGERIA</span>
+                    <span class="flux"></span>
+                </span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">Introduction</a></li>
+                <li><a href="#kingdoms" class="nav-link">The 20 Kingdoms</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+   
+
+    <div class="coverflow-scene" id="coverflow-scene">
+        <div class="coverflow-item active" data-index="0">
+            <div class="cf-image" style="background-image: url('images/ori-olokun.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ile-Ife</div>
+                <div class="cf-subtitle">The Cradle</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item next" data-index="1">
+            <div class="cf-image" style="background-image: url('images/oyo.jpeg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Oyo Empire</div>
+                <div class="cf-subtitle">The Military Might</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item next-2" data-index="2">
+            <div class="cf-image" style="background-image: url('images/lagos6.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Lagos</div>
+                <div class="cf-subtitle">Commerce & Sea</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item hidden" data-index="3">
+            <div class="cf-image" style="background-image: url('images/ibadan2.png'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ibadan</div>
+                <div class="cf-subtitle">City of Warriors</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item prev-2" data-index="4">
+            <div class="cf-image" style="background-image: url('images/ijebu2.png'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ijebu</div>
+                <div class="cf-subtitle">Trade & Splendor</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item prev" data-index="5">
+            <div class="cf-image" style="background-image: url('images/egba2.png'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Egba</div>
+                <div class="cf-subtitle">Freedom Rock</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section class="skills-section" id="kingdoms">
+        <div class="skills-container">
+             
+            <div class="section-header">
+               <div class="square">
+                <h2 class="section-title"> </h2>
+                <p class="section-subtitle"> Explore Nigeria's rich cultural heritage.</p>
+                
+            </div>
+            
+            <div class="skill-categories">
+                <div class="category-tab active" data-category="all">All Kingdoms</div>
+            </div>
+            </div>
+
+            <div class="skills-hexagon-grid" id="kingdomsGrid">
+                </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="section-header">
+            <h2 class="section-title">Connect With Us</h2>
+            <p class="section-subtitle">Have information to add about Nigerian Festivals or Wildlife?</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-text">
+                        <h4>Region</h4>
+                        <p>South West, Nigeria</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-text">
+                        <h4>Email</h4>
+                        <p>contact@yorubaheritage.com</p>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <div class="logo-prism">
+                            <div class="prism-shape"></div>
+                        </div>
+                    </div>
+                    <span class="logo-text">
+                        <span class="prism">YORUBA</span>
+                        <span class="flux">HERITAGE</span>
+                    </span>
+                </div>
+                <p class="footer-description">
+                    Together, these 20 prominent Yoruba kingdoms form the backbone of Yoruba civilization, ensuring that traditions endure while adapting to modern realities.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <div class="footer-links">
+                    <a href="#kingdoms">Kingdoms</a>
+                    <a href="#">Festivals (Coming Soon)</a>
+                    <a href="#">Wildlife (Coming Soon)</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                © 2025 Yoruba Heritage Project.
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="kingdomModal">
+        <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    
+    <img id="modalImageDisplay" src="" alt="Kingdom Image" class="modal-hero-image">
+    
+    <div class="modal-header">
+        <h2 id="modalTitle">Kingdom Name</h2>
+        <h4 id="modalMonarch">Monarch Title</h4>
+    </div>
+    <div class="modal-body" id="modalBody">
+        </div>
+</div>
+            <div class="modal-body" id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Remove Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        });
+
+        // 2. Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // --- 3D COVERFLOW LOGIC ---
+    const items = document.querySelectorAll('.coverflow-item');
+    let currentIndex = 0;
+    const totalItems = items.length;
+
+    function updateCoverflow() {
+        items.forEach((item, index) => {
+            // Reset all classes
+            item.className = 'coverflow-item';
+            
+            // Calculate distance from current index
+            // This weird math handles the "wrapping" around the array (infinite loop)
+            let offset = (index - currentIndex + totalItems) % totalItems;
+            
+            if (offset === 0) {
+                item.classList.add('active'); // Center
+            } else if (offset === 1) {
+                item.classList.add('next');   // Immediate Right
+            } else if (offset === 2) {
+                item.classList.add('next-2'); // Far Right
+            } else if (offset === totalItems - 1) {
+                item.classList.add('prev');   // Immediate Left
+            } else if (offset === totalItems - 2) {
+                item.classList.add('prev-2'); // Far Left
+            } else {
+                item.classList.add('hidden'); // Behind/Invisible
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCoverflow();
+    }
+
+    // Initialize
+    updateCoverflow();
+
+    // Set Auto-Rotation (Every 2.5 seconds)
+    setInterval(nextSlide, 2500);
+
+    // Optional: Click an item to bring it to front
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            currentIndex = index;
+            updateCoverflow();
+        });
+    });
+
+        // 3. Data: The 20 Kingdoms
+        const kingdomsData = [
+            {
+                id: 1,
+                name: "Ile-Ife Kingdom",
+                monarch: "The Ooni of Ife",
+                image: "images/ile-ife.webp",
+                details: [
+                    "Known as the spiritual cradle of the Yoruba race.",
+                    "The Ooni of Ife is regarded as the foremost monarch in Yoruba land.",
+                    "Believed to be the birthplace of humanity in Yoruba mythology, where Oduduwa established the first kingdom.",
+                    "The Ooni plays a central role in cultural preservation and pan-Yoruba unity."
+                ]
+            },
+            {
+                id: 2,
+                name: "Oyo Kingdom",
+                monarch: "The Alaafin of Oyo",
+                image: "images/oyo2.png",
+                details: [
+                    "Historically the most powerful Yoruba empire, dominating West Africa between the 14th and 18th centuries.",
+                    "The Alaafin was both a political and military leader.",
+                    "The Oyo Mesi council balanced the Alaafin’s power, ensuring checks and balances.",
+                    "Remains a symbol of Yoruba resilience and authority."
+                ]
+            },
+            {
+                id: 3,
+                name: "Ijebu Kingdom",
+                monarch: "The Awujale of Ijebu-Ode",
+                image: "images/ijebu4.webp",
+                details: [
+                    "The Awujale is one of the most respected Yoruba monarchs.",
+                    "Ijebu people are known for their entrepreneurial spirit and the Ojude Oba festival.",
+                    "Historically controlled trade routes and were skilled in commerce."
+                ]
+            },
+            {
+                id: 4,
+                name: "Egba Kingdom",
+                monarch: "The Alake of Egbaland",
+                image: "images/egba3.jpg",
+                details: [
+                    "Based in Abeokuta, Ogun State.",
+                    "A first-class monarch with historical ties to anti-colonial resistance.",
+                    "Abeokuta was a stronghold against external invasions and pivotal in nationalist movements."
+                ]
+            },
+            {
+                id: 5,
+                name: "Ibadan Kingdom",
+                monarch: "The Olubadan of Ibadan",
+                image: "images/ibadan4.png",
+                details: [
+                    "Ibadan is the largest city in West Africa.",
+                    "The Olubadan system is unique: succession follows a hierarchical ladder, ensuring fairness.",
+                    "Historically a military powerhouse, producing legendary warriors."
+                ]
+            },
+            {
+                id: 6,
+                name: "Lagos Kingdom",
+                monarch: "The Oba of Lagos",
+                image: "images/lagos5.jpg",
+                details: [
+                    "Lagos, Nigeria’s commercial capital, has deep Yoruba roots.",
+                    "A highly influential monarch blending tradition with modernity.",
+                    "Historically a major trade hub connecting Africa with Europe."
+                ]
+            },
+            {
+                id: 7,
+                name: "Akure Kingdom",
+                monarch: "The Deji of Akure",
+                image: "images/akure2.jpg",
+                details: [
+                    "A prominent Yoruba city in Ondo State.",
+                    "The Deji is a custodian of culture and traditions.",
+                    "Akure’s history is tied deeply to migration from Ile-Ife."
+                ]
+            },
+            {
+                id: 8,
+                name: "Ondo Kingdom",
+                monarch: "The Osemawe of Ondo",
+                image: "images/ondo.png",
+                details: [
+                    "The Osemawe is the traditional ruler of Ondo town.",
+                    "Known for rich cultural heritage and festivals.",
+                    "The kingdom traces its origins to Oduduwa’s descendants."
+                ]
+            },
+            {
+                id: 9,
+                name: "Iwo Kingdom",
+                monarch: "The Oluwo of Iwo",
+                image: "images/iwo.jpeg",
+                details: [
+                    "A vibrant monarch known for blending tradition with modern reforms.",
+                    "Holds historical significance in Osun State.",
+                    "Emphasizes cultural revival and youth engagement."
+                ]
+            },
+            {
+                id: 10,
+                name: "Ikere Kingdom",
+                monarch: "The Ogoga of Ikere",
+                image: "images/ikere.jpg",
+                details: [
+                    "Located in Ekiti State.",
+                    "A respected monarch with influence in Ekiti politics and culture.",
+                    "Traditions are deeply tied to Yoruba mythology."
+                ]
+            },
+            {
+                id: 11,
+                name: "Iseyin Kingdom",
+                monarch: "The Aseyin of Iseyin",
+                image: "images/iseyin.png",
+                details: [
+                    "Famous for its aso-oke weaving industry.",
+                    "The Aseyin preserves Yoruba textile traditions.",
+                    "Historically contributed to the Oyo Empire’s expansion."
+                ]
+            },
+            {
+                id: 12,
+                name: "Ede Kingdom",
+                monarch: "The Timi of Ede",
+                image: "images/ede6.jpg",
+                details: [
+                    "Located in Osun State.",
+                    "The Timi is a custodian of Yoruba traditions.",
+                    "Played a historical role in trade and cultural exchanges."
+                ]
+            },
+            {
+                id: 13,
+                name: "Ikirun Kingdom",
+                monarch: "The Akinrun of Ikirun",
+                
+                details: [
+                    "A historic Yoruba town.",
+                    "Oversees cultural festivals and traditions.",
+                    "Has historical ties to Ile-Ife."
+                ]
+            },
+            {
+                id: 14,
+                name: "Ilesa Kingdom",
+                monarch: "The Owa Obokun of Ijesaland",
+                details: [
+                    "A major Yoruba town in Osun State.",
+                    "The Owa Obokun is a revered monarch.",
+                    "Ijesa people are known for their industriousness and cultural pride."
+                ]
+            },
+            {
+                id: 15,
+                name: "Ogbomoso Kingdom",
+                monarch: "The Soun of Ogbomoso",
+                details: [
+                    "A historic Yoruba city in Oyo State.",
+                    "The Soun is a respected monarch.",
+                    "Played a significant role in Yoruba military history."
+                ]
+            },
+            {
+                id: 16,
+                name: "Ikorodu Kingdom",
+                monarch: "The Ayangburen of Ikorodu",
+                details: [
+                    "Part of Lagos State.",
+                    "A custodian of traditions.",
+                    "Known for its entrepreneurial spirit."
+                ]
+            },
+            {
+                id: 17,
+                name: "Ipetumodu Kingdom",
+                monarch: "The Apetumodu of Ipetumodu",
+                details: [
+                    "Located in Osun State.",
+                    "A respected monarch with historical ties to Ile-Ife."
+                ]
+            },
+            {
+                id: 18,
+                name: "Ila-Orangun Kingdom",
+                monarch: "The Orangun of Ila",
+                details: [
+                    "Located in Osun State.",
+                    "A prominent monarch.",
+                    "Historically significant in Yoruba migration stories."
+                ]
+            },
+            {
+                id: 19,
+                name: "Ikare Kingdom",
+                monarch: "The Olukare of Ikare",
+                details: [
+                    "In Ondo State.",
+                    "A custodian of Yoruba traditions.",
+                    "Known for vibrant markets and festivals."
+                ]
+            },
+            {
+                id: 20,
+                name: "Ado-Ekiti Kingdom",
+                monarch: "The Ewi of Ado-Ekiti",
+                details: [
+                    "Capital of Ekiti State.",
+                    "The Ewi is a first-class monarch.",
+                    "Ekiti people are known for their unity and cultural pride."
+                ]
+            }
+        ];
+
+      // 4. Render the Grid
+const gridContainer = document.getElementById('kingdomsGrid');
+
+kingdomsData.forEach(kingdom => {
+    const card = document.createElement('div');
+    card.className = 'kingdom-card';
+    card.onclick = () => openModal(kingdom.id);
+    
+    // WE ADDED THE IMG TAG HERE 👇
+    card.innerHTML = `
+        <img src="${kingdom.image}" alt="${kingdom.name}" class="card-img-top">
+        <h3 class="kingdom-title">${kingdom.name}</h3>
+        <div class="monarch-title">${kingdom.monarch}</div>
+        <button class="card-btn">Read More</button>
+    `;
+    
+    gridContainer.appendChild(card);
+});
+       // 5. Modal Logic
+const modal = document.getElementById('kingdomModal');
+const mTitle = document.getElementById('modalTitle');
+const mMonarch = document.getElementById('modalMonarch');
+const mBody = document.getElementById('modalBody');
+// NEW REFERENCE 👇
+const mImage = document.getElementById('modalImageDisplay'); 
+
+function openModal(id) {
+    const data = kingdomsData.find(k => k.id === id);
+    if(data) {
+        mTitle.textContent = data.name;
+        mMonarch.textContent = data.monarch;
+        
+        // INJECT IMAGE SOURCE HERE 👇
+        mImage.src = data.image; 
+        
+        const listHtml = `<ul>${data.details.map(d => `<li>${d}</li>`).join('')}</ul>`;
+        mBody.innerHTML = listHtml;
+        
+        modal.style.display = 'flex';
+    }
+}
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal if clicking outside content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
