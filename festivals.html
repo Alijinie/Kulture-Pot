@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoruba Kingdoms - Heritage & History</title>
+    <link rel="stylesheet" href="global.css">
+    
+    <style>
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            /* Add a subtle bounce on hover */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            position: relative;
+            /* "Drumbeat" Animation: Beat-Beat-Pause */
+            animation: tribalPulse 3s infinite;
+        }
+
+        /* THE SHAPE CONTAINER */
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* THE CORE SHAPE (Modified for Pattern) */
+        .prism-shape {
+            width: 35px;
+            height: 35px;
+            position: relative;
+            transform: rotate(45deg); /* Keeps your diamond base */
+            
+            /* TRIBAL PATTERN GENERATOR */
+            background: 
+                /* Gold accent center */
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                /* Woven stripes */
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            
+            /* Sharp borders for a "cut" look */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* CREATING THE STAR/FLOWER GEOMETRY */
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px; /* Cover border */
+            background: inherit; /* Inherit the tribal pattern */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before {
+            transform: rotate(60deg);
+        }
+
+        .prism-shape::after {
+            transform: rotate(-60deg);
+        }
+
+        /* TYPOGRAPHY */
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            /* Gradient text using the palette */
+            background: linear-gradient(90deg, #04682a, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* The decorative sub-line */
+        .logo-text .flux {
+            height: 6px;
+            width: 100%;
+            margin-top: 4px;
+            /* Zig-Zag "Embroidery" Pattern */
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 10px 10px;
+            background-color: #008751;
+        }
+
+        /* ANIMATIONS */
+        
+        /* Mimics a heartbeat or drum rhythm */
+        @keyframes tribalPulse {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.15); } /* Beat */
+            10% { transform: scale(1); }
+            15% { transform: scale(1.15); } /* Beat */
+            30% { transform: scale(1); }    /* Pause... */
+            100% { transform: scale(1); }
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #121212; /* Tribal Dark */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-prism {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 0 auto 30px;
+        }
+
+        .prism-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent; /* Increased slightly for visibility */
+            transform-origin: center;
+            animation: prismRotate 3s linear infinite;
+            box-sizing: border-box;
+        }
+
+        .prism-face:nth-child(1) {
+            /* Clay to Green */
+            border-image: linear-gradient(45deg, #D2691E, #008751) 1;
+            animation-delay: 0s;
+        }
+
+        .prism-face:nth-child(2) {
+            /* Green to Gold */
+            border-image: linear-gradient(45deg, #008751, #FFD700) 1;
+            transform: rotate(60deg);
+            animation-delay: 0.2s;
+        }
+
+        .prism-face:nth-child(3) {
+            /* Gold to Clay */
+            border-image: linear-gradient(45deg, #FFD700, #D2691E) 1;
+            transform: rotate(120deg);
+            animation-delay: 0.4s;
+        }
+
+        .loading-text {
+            color: #FFD700;
+            font-family: monospace;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        @keyframes prismRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.8); /* Slight shrink for 'breathing' effect */
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+.header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* Gradient matching Tribal Dark theme */
+            background: linear-gradient(180deg,
+                    rgba(18, 18, 18, 0.98) 0%,
+                    rgba(18, 18, 18, 0.9) 50%,
+                    rgba(18, 18, 18, 0) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid #008751; /* Green accent on scroll */
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px; /* Slight adjustment for better spacing */
+            transition: padding 0.3s ease;
+        }
+
+        .header.scrolled .nav-container {
+            padding: 10px 30px; /* Shrinks slightly on scroll */
+        }
+
+        /* Nav Links for Demo */
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #FFD700; /* Tribal Gold */
+        }
+     .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1002; /* Ensure logo stays above menu on mobile */
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+            position: relative;
+            animation: tribalPulse 3s infinite;
+        }
+
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prism-shape {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            transform: rotate(45deg);
+            background: 
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: inherit;
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before { transform: rotate(60deg); }
+        .prism-shape::after { transform: rotate(-60deg); }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            background: linear-gradient(90deg, #f4f4f4, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .flux {
+            height: 4px;
+            width: 100%;
+            margin-top: 3px;
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 8px 8px;
+            background-color: #008751;
+        }
+
+        /* --- EXISTING MODAL STYLES (Keep these) --- */
+.skills-hexagon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); gap: 40px; padding: 20px; }
+.kingdom-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(5px); cursor: pointer; position: relative; overflow: hidden; }
+.kingdom-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan, #00f2ff); box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1); }
+.kingdom-title { color: #fff; font-size: 1.4rem; margin-bottom: 10px; font-weight: bold; }
+.monarch-title { color: var(--accent-cyan, #00f2ff); font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+.card-btn { display: inline-block; padding: 8px 20px; background: transparent; border: 1px solid var(--accent-purple, #bc13fe); color: #fff; border-radius: 20px; font-size: 0.8rem; margin-top: 10px; transition: 0.3s; }
+.kingdom-card:hover .card-btn { background: var(--accent-purple, #bc13fe); }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+.modal-content { background: #263861; border: 1px solid var(--accent-green, #00f2ff); width: 90%; max-width: 600px; border-radius: 20px; padding: 40px; position: relative; box-shadow: 0 0 50px rgba(0, 242, 255, 0.2); animation: modalSlide 0.4s ease-out; }
+@keyframes modalSlide { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.close-modal { position: absolute; top: 20px; right: 20px; color: #fff; font-size: 30px; cursor: pointer; line-height: 1; }
+.modal-header h2 { color: #fff; margin-bottom: 5px; }
+.modal-header h4 { color: var(--accent-purple, #bc13fe); margin-bottom: 20px; font-weight: 400; }
+.modal-body ul { list-style-type: none; padding: 0; }
+.modal-body li { color: #ccc; margin-bottom: 12px; padding-left: 20px; position: relative; line-height: 1.6; }
+.modal-body li::before { content: "▹"; color: var(--accent-cyan, #00f2ff); position: absolute; left: 0; }
+
+/* --- NEW 3D COVERFLOW HERO STYLES --- */
+.hero {
+    height: 100vh;
+
+  background: radial-gradient(
+    circle at center, 
+    #01211b 5%,   /* Rich Orchid/Purple */
+    #002821 40%,  /* Deep Plum */
+    #012b12 100%  /* Black */);
+    background-color: #01211b;
+  background-image: 
+url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Essential for 3D effect */
+}
+
+.coverflow-scene {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.coverflow-item {
+    position: absolute;
+    width: 300px;
+    height: 420px;
+    background: linear-gradient(135deg, #012e28 0%, #063620 100%);
+    border: 2px solid #333;
+    border-radius: 15px;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Fluid easing */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* Reflection effect */
+    -webkit-box-reflect: below 10px linear-gradient(transparent, transparent, rgba(0,0,0,0.4));
+}
+
+/* Content inside the Hero Cards */
+.cf-image {
+    position: center;
+    top: 0; left: 0; width: 80%; height: 80%;
+    object-fit: cover;
+    
+    border-radius: 15px;
+    opacity: 0.6;
+    transition: opacity 0.5s;
+    z-index: 1;
+}
+
+.cf-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: #263861;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    backdrop-filter: blur(220px);
+    border-top: 1px solid var(--accent-cyan);
+}
+
+.cf-title {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.cf-subtitle {
+    color: var(--accent-purple);
+    font-size: 0.9rem;
+}
+
+/* STATES for the 3D Rotation */
+/* Center Item (The "Emperor") */
+.coverflow-item.active {
+    transform: translateX(0) translateZ(200px) rotateY(0deg);
+    z-index: 10;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+    filter: brightness(1.2);
+}
+.coverflow-item.active .cf-image { opacity: 1; }
+
+/* Right Side Items */
+.coverflow-item.next {
+    transform: translateX(350px) translateZ(0px) rotateY(-45deg);
+    z-index: 5;
+    filter: brightness(0.6);
+}
+.coverflow-item.next-2 {
+    transform: translateX(600px) translateZ(-200px) rotateY(-60deg);
+    z-index: 2;
+    filter: brightness(0.4);
+    opacity: 0.7;
+}
+
+/* Left Side Items */
+.coverflow-item.prev {
+    transform: translateX(-350px) translateZ(0px) rotateY(45deg);
+    z-index: 5;
+    filter: brightness(0.6);
+}
+.coverflow-item.prev-2 {
+    transform: translateX(-600px) translateZ(-200px) rotateY(60deg);
+    z-index: 2;
+    filter: brightness(0.4);
+    opacity: 0.7;
+}
+
+/* Hidden items (behind) */
+.coverflow-item.hidden {
+    transform: translateZ(-400px);
+    opacity: 0;
+    z-index: 0;
+}
+
+.hero-overlay-text {
+    position: absolute;
+    bottom: 10%;
+    text-align: center;
+    z-index: 20;
+    pointer-events: none;
+}
+/* Style for the Grid Card Images */
+.card-img-top {
+    width: 100%;
+    height: 300px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures image covers area without stretching */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--accent-purple);
+}
+
+/* Style for the Large Modal Image */
+.modal-hero-image {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--accent-green);
+    display: none; /* Hidden by default until loaded */
+}
+
+/* Ensure image shows when src is present */
+.modal-hero-image[src] {
+    display: block;
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES ===== */
+
+/* Large tablets / small desktops */
+@media (max-width: 1024px) {
+    .hero { perspective: 900px; }
+    .coverflow-scene { height: 360px; }
+    .coverflow-item { width: 260px; height: 380px; }
+    .coverflow-item.active { transform: translateX(0) translateZ(160px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(260px) translateZ(0px) rotateY(-38deg); }
+    .coverflow-item.next-2 { transform: translateX(460px) translateZ(-160px) rotateY(-52deg); }
+    .coverflow-item.prev { transform: translateX(-260px) translateZ(0px) rotateY(38deg); }
+    .coverflow-item.prev-2 { transform: translateX(-460px) translateZ(-160px) rotateY(52deg); }
+    .card-img-top { height: 260px; }
+    .modal-hero-image { height: 220px; }
+}
+
+/* Tablets and large phones */
+@media (max-width: 768px) {
+    .hero { height: 70vh; padding: 30px 10px; perspective: 800px; }
+    .coverflow-scene { height: 320px; }
+    .coverflow-item { width: 220px; height: 320px; padding: 14px; border-radius: 12px; }
+    .cf-content { padding: 12px; }
+    .cf-title { font-size: 1rem; }
+    .cf-subtitle { font-size: 0.8rem; }
+
+    .coverflow-item.active { transform: translateX(0) translateZ(140px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(180px) translateZ(0px) rotateY(-32deg); }
+    .coverflow-item.next-2 { transform: translateX(320px) translateZ(-120px) rotateY(-46deg); }
+    .coverflow-item.prev { transform: translateX(-180px) translateZ(0px) rotateY(32deg); }
+    .coverflow-item.prev-2 { transform: translateX(-320px) translateZ(-120px) rotateY(46deg); }
+    .coverflow-item.hidden { transform: translateZ(-300px); }
+
+    .card-img-top { height: 220px; }
+    .modal-hero-image { height: 200px; }
+
+    /* Grid adjustments */
+    .skills-hexagon-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; padding: 16px; }
+    .kingdom-card { padding: 18px; }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .hero { height: 60vh; perspective: 600px; }
+    .coverflow-scene { height: 260px; }
+    .coverflow-item { width: 180px; height: 260px; padding: 10px; border-radius: 10px; }
+    .cf-content { padding: 10px; }
+    .cf-title { font-size: 0.95rem; }
+    .cf-subtitle { font-size: 0.75rem; }
+
+    .coverflow-item.active { transform: translateX(0) translateZ(120px) rotateY(0deg); }
+    .coverflow-item.next { transform: translateX(120px) translateZ(0px) rotateY(-28deg); }
+    .coverflow-item.next-2 { transform: translateX(220px) translateZ(-90px) rotateY(-40deg); }
+    .coverflow-item.prev { transform: translateX(-120px) translateZ(0px) rotateY(28deg); }
+    .coverflow-item.prev-2 { transform: translateX(-220px) translateZ(-90px) rotateY(40deg); }
+    .coverflow-item.hidden { transform: translateZ(-220px); opacity: 0; }
+
+    .card-img-top { height: 350px; }
+    .modal-hero-image { height: 220px; }
+
+    /* Modal/content sizing for small screens */
+    .modal-content { width: 95%; max-width: 340px; padding: 20px; border-radius: 14px; }
+    .modal-header h2 { font-size: 1.1rem; }
+    .modal-header h4 { font-size: 0.9rem; }
+
+    /* Grid to single column */
+    .skills-hexagon-grid { grid-template-columns: 2fr; gap: 25px; padding: 12px; }
+    .kingdom-card { padding: 14px; font-size: 0.95rem; }
+
+    /* Reduce heavy shadows/reflections for performance on low-end devices */
+    .coverflow-item { -webkit-box-reflect: none; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
+}
+
+/* Very large screens - increase presence */
+@media (min-width: 1400px) {
+    .coverflow-scene { height: 520px; }
+    .coverflow-item { width: 360px; height: 500px; }
+    .coverflow-item.active { transform: translateX(0) translateZ(260px); }
+    .coverflow-item.next { transform: translateX(420px) translateZ(0px) rotateY(-48deg); }
+    .coverflow-item.next-2 { transform: translateX(720px) translateZ(-240px) rotateY(-62deg); }
+    .coverflow-item.prev { transform: translateX(-420px) translateZ(0px) rotateY(48deg); }
+    .coverflow-item.prev-2 { transform: translateX(-720px) translateZ(-240px) rotateY(62deg); }
+    .card-img-top { height: 360px; }
+    .modal-hero-image { height: 300px; }
+}
+
+/*.skills-container {
+    background-image: url("images/back4.png");
+    background-size: 400px;
+    
+}*/
+
+.skills-section {
+    background-image: url("images/bak4.png");
+    background-size: 400px;
+}
+
+
+
+</style>
+    
+    <style>
+    /* ===== COOL ADDITIONS ===== */
+
+    /* Performance hint */
+    .coverflow-item { will-change: transform, opacity, filter; transform-style: preserve-3d; backface-visibility: hidden; cursor: pointer; }
+
+    /* Lift-on-hover for non-active items (desktop) */
+  /*  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+        .coverflow-item:not(.active):hover {
+            transform: translateY(-12px) translateZ(30px) rotateY(6deg) !important;
+            filter: brightness(1.05) contrast(1.03);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+            z-index: 12;
+        }
+    }
+
+    /* Animated soft aura behind center card */
+    .coverflow-item.active::after {
+        content: "";
+        position: absolute;
+        left: 50%; top: 100%; transform: translateX(-50%);
+        width: 80%; height: 28px; margin-top: 12px;
+        background: radial-gradient(ellipse at center, rgba(0,242,255,0.12), transparent 50%);
+        filter: blur(8px);
+        pointer-events: none;
+    }
+
+    /* Shimmer for titles */
+    .cf-title {
+        background: linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0.98) 40%, transparent 60%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        animation: shimmer 3.2s linear infinite;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Glassy button glow */
+    .card-btn {
+        position: relative; overflow: hidden; z-index: 0;
+        transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    }
+    .card-btn::before {
+        content: ""; position: absolute; left: -40%; top: -40%; width: 180%; height: 180%; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 25%), linear-gradient(90deg, rgba(188,19,254,0.08), rgba(0,242,255,0.06)); transform: translateY(0); transition: transform .6s cubic-bezier(.2,.9,.2,1); z-index: -1; }
+    .card-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(124,58,237,0.12); }
+    .card-btn:hover::before { transform: translateY(-6px); }
+
+    /* Animated hero ambient gradient */
+    .hero::before {
+        content: ""; position: absolute; inset: -20% -30%; z-index: 0; pointer-events: none;
+        background: radial-gradient(30% 30% at 10% 20%, rgba(0,242,255,0.05), transparent 10%),
+                    radial-gradient(25% 25% at 90% 80%, rgba(188,19,254,0.05), transparent 10%);
+        mix-blend-mode: screen; opacity: 0.9; animation: ambientShift 12s linear infinite;
+    }
+    @keyframes ambientShift { 0%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-6%) rotate(4deg)} 100%{transform:translateY(0) rotate(0deg)} }
+
+    /* Subtle parallax for images inside cards (mouse-based JS optional) */
+    .cf-image { transform-origin: center; transition: transform .7s cubic-bezier(.2,.9,.2,1); }
+    .coverflow-item:hover .cf-image { transform: scale(1.03) translateZ(6px); }
+
+    /* Modal: softer edges + focus outline for accessibility */
+    .modal-content { outline: none; box-shadow: 0 30px 80px rgba(1, 59, 6, 0.65); }
+    .modal-content:focus { box-shadow: 0 30px 80px rgba(1, 65, 30, 0.75), 0 0 0 4px rgba(1, 78, 14, 0.06); }
+
+    /* Reduce motion preference: turn off animations/transforms */
+    @media (prefers-reduced-motion: reduce) {
+        .cf-title, .hero::before, .card-btn::before, .coverflow-item, .cf-image { animation: none !important; transition: none !important; transform: none !important; }
+    }
+
+    /* Small tweaks for contrast and legibility on dark backgrounds */
+    .cf-subtitle { color: rgba(255,255,255,0.85); letter-spacing: 1px; }
+
+    .topMsg {
+        padding: 12px 30px;
+	background: var(--carbon-medium);
+	border: 1px solid var(--metal-dark);
+	border-radius: 30px;
+	color: var(--text-secondary);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 1px;
+    color: var(--text-primary);
+	box-shadow: 0 5px 20px rgba(153, 69, 255, 0.3);
+    }
+
+/* From Uiverse.io by ilkhoeri */ 
+/* --- Layout Container --- */
+.contact-section {
+  padding: 40px 20px;
+  background: #1a1a1a; /* Dark background works best for your 3D lighting */
+  color: white;
+  overflow: hidden; /* Prevents scrollbars if 3D elements poke out */
+}
+
+.contact-container {
+  display: flex;
+  align-items: center; /* Vertically centers the text with the carousel */
+  justify-content: center;
+  gap: 2rem; /* Space between text and carousel */
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 500px; /* Ensures the section has height */
+}
+
+/* --- Left Side: Info --- */
+.contact-info {
+  flex: 1; /* Takes up half the space */
+  z-index: 10; /* Ensures text stays on top */
+  padding: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.info-icon {
+  font-size: 1.5rem;
+}
+
+.info-text h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}
+
+.info-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #a0a0a0;
+}
+
+/* --- Right Side: 3D Carousel Wrapper --- */
+.wrapper {
+  flex: 1; /* Takes up the other half */
+  height: 500px; /* CRITICAL: Needs fixed height to render 3D context */
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* perspective: 1000px; Remove this if using it in .inner, but good for container */
+}
+
+/* --- Your Existing Carousel CSS (Unchanged) --- */
+.inner {
+  --w: 100px;
+  --h: 150px;
+  --translateZ: calc((var(--w) + var(--h)) + 0px);
+  --rotateX: -15deg;
+    --perspective: 800px;
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective));
+  animation: rotating 20s linear infinite;
+  /* Centering fix since wrapper is flex: */
+  top: auto; 
+  left: auto;
+}
+
+@keyframes rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+  }
+}
+
+.card {
+  position: absolute;
+  border: 2px solid rgba(var(--color-card));
+  border-radius: 12px;
+  overflow: hidden;
+  inset: 0;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: radial-gradient(
+      circle,
+      rgba(var(--color-card), 0.2) 0%,
+      rgba(var(--color-card), 0.6) 80%,
+      rgba(var(--color-card), 0.9) 100%
+  );
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .contact-section {
+     /* CRITICAL: Allows the 3D elements to poke out vertically without getting cut */
+     overflow: hidden;
+
+  .contact-container {
+    flex-direction: column;
+    gap: 4rem; /* Increased gap so the spinning cards don't hit the text above */
+  }
+  
+  .wrapper {
+    width: 100%;
+    height: 250px; /* Slightly reduced height */
+    /* Ensure the wrapper itself doesn't clip the 3D content */
+    overflow: visible; 
+    
+  }
+
+  .inner {
+    /* CRITICAL FIX: This shrinks the whole 3D carousel to 70% size 
+       so the rotation radius fits inside the mobile screen width */
+    transform: perspective(var(--perspective)) scale(0.5); 
+    
+    /* OPTIONAL: Push it down slightly if it's hitting the text */
+    top: -150%; 
+  }
+  
+  .contact-info {
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 0px;
+    margin-bottom: 1px;
+    /* Add a background or z-index to ensure text sits 'behind' or 'above' correctly */
+    z-index: 8; 
+    margin-bottom: -10px;
+  }
+}}
+
+    </style>
+    
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-prism">
+                <div class="prism-face"></div>
+                <div class="prism-face"></div>
+                <div class="prism-face"></div>
+            </div>
+            <div style="color: var(--accent-purple); font-size: 18px; text-transform: uppercase; letter-spacing: 3px;">Loading History...</div>
+        </div>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="nav-container">
+            <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-prism">
+                        <div class="prism-shape"></div>
+                    </div>
+                </div>
+                <span class="logo-text">
+                    <span class="prism">Kulture Pot Naija</span>
+                    <span class="flux"></span>
+                </span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Youruba Kingdoms</a></li>
+                <li><a href="#about" class="nav-link">Introduction</a></li>
+                <li><a href="bronzes.html" class="nav-link">Regalia</a></li>
+                <li><a href="festivals.html" class="nav-link active">Festivals</a></li>
+            </ul>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+  
+    
+    <div class="coverflow-scene" id="coverflow-scene">
+        
+        <div class="coverflow-item active" data-index="0">
+            <div class="cf-image" style="background-image: url('images/d1.jpeg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Uhunmwu-Ẹkuẹ</div>
+                <div class="cf-subtitle">Pennsylvania Museum-USA</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item next" data-index="1">
+            <div class="cf-image" style="background-image: url('images/k1.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ama</div>
+                <div class="cf-subtitle">British Museum-London</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item next-2" data-index="2">
+            <div class="cf-image" style="background-image: url('images/d4.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Uhunmwu-Ẹkuẹ</div>
+                <div class="cf-subtitle">Field Museum Chicago</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item hidden" data-index="3">
+            <div class="cf-image" style="background-image: url('images/d9.png'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ama</div>
+                <div class="cf-subtitle">British Museum-London</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item prev-2" data-index="4">
+            <div class="cf-image" style="background-image: url('images/d2.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Okpia</div>
+                <div class="cf-subtitle">Detroit Institute of Arts-USA</div>
+            </div>
+        </div>
+
+        <div class="coverflow-item prev" data-index="5">
+            <div class="cf-image" style="background-image: url('images/d6.jpeg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Uhunmwu-Elao</div>
+                <div class="cf-subtitle">Linden Museum Stuttgart-Germany</div>
+            </div>
+        
+        </div>
+
+        <div class="coverflow-item prev" data-index="6">
+            <div class="cf-image" style="background-image: url('images/d5.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Ooni-ife Sculpture</div>
+                <div class="cf-subtitle">British Museum-London</div>
+            </div>
+        
+        </div>
+        <div class="coverflow-item prev" data-index="7">
+            <div class="cf-image" style="background-image: url('images/d7.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Owo Ivory Vessel</div>
+                <div class="cf-subtitle">Owo Museum, Nigeria</div>
+            </div>
+        
+        </div>
+        <div class="coverflow-item prev" data-index="8">
+            <div class="cf-image" style="background-image: url('images/a3.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Benin Bronze Head</div>
+                <div class="cf-subtitle">British Museum, London</div>
+            </div>
+        
+        </div>
+        <div class="coverflow-item prev" data-index="9">
+            <div class="cf-image" style="background-image: url('images/a10.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Benin Palace Drum</div>
+                <div class="cf-subtitle">Pennsylvania Museum-USA</div>
+            </div>
+        
+        </div>
+
+        <div class="coverflow-item prev" data-index="10">
+            <div class="cf-image" style="background-image: url('images/a5.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Queen Idia Bronze Head</div>
+                <div class="cf-subtitle">British Museum-London</div>
+            </div>
+        
+        </div>
+
+        <div class="coverflow-item prev" data-index="11">
+            <div class="cf-image" style="background-image: url('images/a6.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Benin Bronze Leopard</div>
+                <div class="cf-subtitle">British Museum-London</div>
+            </div>
+        
+        </div>
+
+        <div class="coverflow-item prev" data-index="12">
+            <div class="cf-image" style="background-image: url('images/a7.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Uhunmwu-Elao</div>
+                <div class="cf-subtitle">Linden Museum Stuttgart-Germany</div>
+            </div>
+        
+        </div>
+
+        <div class="coverflow-item prev" data-index="13">
+            <div class="cf-image" style="background-image: url('images/a8.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-content">
+                <div class="cf-title">Attah of Idah</div>
+                <div class="cf-subtitle">British Museum, London</div>
+            </div>
+        
+        </div>
+
+    </div>
+
+</section>
+
+    <section class="skills-section" id="kingdoms">
+        <div class ="decoration1">
+        <div class="skills-container">
+             
+            <div class="section-header">
+               <div class="square">
+                <h2 class="section-title"> </h2>
+                
+                
+            </div>
+            
+            <div class="skill-categories">
+                <div class="topMsg" data-category="all">The Benin Bronzes encompass over 3,000-5,000 artworks (primarily brass and bronze plaques, heads, bells, figures, and ivory carvings) looted by British forces during the Punitive Expedition to Benin City on February 18-20, 1897.</div>
+            </div>
+            </div>
+
+            <div class="skills-hexagon-grid" id="kingdomsGrid">
+                </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+ 
+
+  <div class="contact-container">
+    <div class="contact-info">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <h4>Region</h4>
+          <p>South West, Nigeria</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📧</div>
+        <div class="info-text">
+          <h4>Email</h4>
+          <p>contact@yorubaheritage.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="inner" style="--quantity: 10;">
+        <div class="card" style="--index: 0;--color-card: 142, 249, 252;">
+          <div class="img">
+             <img src="images/a6.jpg" alt="Benin Mask" />
+          </div>
+        </div>
+        <div class="card" style="--index: 1;--color-card: 142, 252, 157;">
+          <div class="img">
+            <img src="images/a2.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="background-image: url('images/oyo.jpeg'); background-size: cover; background-position: center;">
+          <div class="img"></div>
+        </div>
+        <div class="card" style="--index: 2;--color-card: 142, 252, 157;">
+          <div class="img">
+            <img src="images/a3.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 3;--color-card: 215, 252, 142;">
+          <div class="img">
+            <img src="images/a5.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 4;--color-card: 252, 252, 142;">
+          <div class="img">
+            <img src="images/a10.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 5;--color-card: 252, 208, 142;">
+          <div class="img">
+            <img src="images/a1.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 6;--color-card: 252, 142, 142;">
+          <div class="img">
+            <img src="images/a9.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 7;--color-card: 252, 142, 239;">
+          <div class="img">
+            <img src="images/a7.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 8;--color-card: 204, 142, 252;">
+          <div class="img">
+            <img src="images/a8.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 9;--color-card: 142, 202, 252;">
+          <div class="img">
+            <img src="images/a4.jpg"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <div class="logo-prism">
+                            <div class="prism-shape"></div>
+                        </div>
+                    </div>
+                    <span class="logo-text">
+                        <span class="prism">YORUBA</span>
+                        <span class="flux">HERITAGE</span>
+                    </span>
+                </div>
+                <p class="footer-description">
+                    Together, these 20 prominent Yoruba kingdoms form the backbone of Yoruba civilization, ensuring that traditions endure while adapting to modern realities.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Explore</h4>
+                <div class="footer-links">
+                    <a href="#kingdoms">Kingdoms</a>
+                    <a href="#">Festivals (Coming Soon)</a>
+                    <a href="#">Wildlife (Coming Soon)</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                © 2025 Yoruba Heritage Project.
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="kingdomModal">
+        <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    
+    <img id="modalImageDisplay" src="" alt="Kingdom Image" class="modal-hero-image">
+    
+    <div class="modal-header">
+        <h2 id="modalTitle">Kingdom Name</h2>
+        <h4 id="modalMonarch">Monarch Title</h4>
+    </div>
+    <div class="modal-body" id="modalBody">
+        </div>
+</div>
+            <div class="modal-body" id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Remove Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 1000);
+        });
+
+        // 2. Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // --- 3D COVERFLOW LOGIC ---
+    const items = document.querySelectorAll('.coverflow-item');
+    let currentIndex = 0;
+    const totalItems = items.length;
+
+    function updateCoverflow() {
+        items.forEach((item, index) => {
+            // Reset all classes
+            item.className = 'coverflow-item';
+            
+            // Calculate distance from current index
+            // This weird math handles the "wrapping" around the array (infinite loop)
+            let offset = (index - currentIndex + totalItems) % totalItems;
+            
+            if (offset === 0) {
+                item.classList.add('active'); // Center
+            } else if (offset === 1) {
+                item.classList.add('next');   // Immediate Right
+            } else if (offset === 2) {
+                item.classList.add('next-2'); // Far Right
+            } else if (offset === totalItems - 1) {
+                item.classList.add('prev');   // Immediate Left
+            } else if (offset === totalItems - 2) {
+                item.classList.add('prev-2'); // Far Left
+            } else {
+                item.classList.add('hidden'); // Behind/Invisible
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCoverflow();
+    }
+
+    // Initialize
+    updateCoverflow();
+
+    // Set Auto-Rotation (Every 2.5 seconds)
+    setInterval(nextSlide, 2500);
+
+    // Optional: Click an item to bring it to front
+    items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            currentIndex = index;
+            updateCoverflow();
+        });
+    });
+
+        // 3. Data: The 20 Kingdoms
+        const kingdomsData = [
+            {
+                id: 1,
+                name: "AMA",
+                monarch: "16 Century to 17th Century",
+                image: "images/ama.jpg",
+                details: [
+                    "This piece depicts the Oba of Benin with mudfish legs, symbolizing his spiritual connection to water and the divine. Facing forward, he grasps a leopard by the tail in each hand, representing royal authority and power. The Oba wears a cylindrical beaded crown with an oro protrusion and three ornamental beads, along with a deep beaded collar, tunic, and a patterned skirt adorned with pendant masks of animal heads. Two mudfish hang from his waist belt, reinforcing aquatic symbolism. The leopards, shown in profile, wear collars with bells, emphasizing their domestication and the Oba's mystical control over nature and animals.",    
+                ]
+            },
+            {
+                id: 2,
+                name: "Okpia",
+                monarch: "14th Century",
+                image: "images/opia.webp",
+                details: [
+                    "This particular piece is closely tied to the Oba and is best described as court art. Its tradition of bronze casting dates back to the 14th century, influenced by Ife. Metalworkers produced heads, statues, ivory tusks, bells, and altar sticks, all intended for palace use. These objects were often placed on rectangular altars consecrated by a new Oba, serving as spiritual connections to his presence. The works symbolized royal authority and continuity, reminding people of the Oba and enabling communication with his spirit. The “regal dwarf” figure reflects this sacred artistic tradition, emphasizing the palace’s central role in Benin’s political and spiritual life.",
+                    
+                ]
+            },
+            {
+                id: 3,
+                name: "Ooni-ife Sculpture",
+                monarch: "12th Century - 15th Century",
+                image: "images/a1.jpg",
+                details: [
+                    "The Bronze Head from Ife is one of eighteen naturalistic copper alloy sculptures discovered in 1938 at Wunmonije Compound in Ife, Nigeria, the spiritual and former royal center of the Yoruba. Dating to the 12th–15th centuries C.E., it is believed to represent an Ooni (ruler) of Ife. The head features an elaborate beaded headdress, possibly a crown, and facial striations that signify high status and authority. Crafted using the sophisticated lost-wax technique, its realism and artistry astonished scholars, challenging Western misconceptions about African art and affirming the advanced metallurgical and cultural achievements of the Yoruba civilization.",
+                    
+                ]
+            },
+            {
+                id: 4,
+                name: "Owo Ivory Vessel",
+                monarch: "Owo Museum, Nigeria",
+                image: "images/a9.jpg",
+                details: [
+                    "The Owo ivory lidded vessel, known as udama or udamalore, symbolized high status and authority in the Owo Kingdom, an ancient Yoruba state in present-day Nigeria. Crafted by Yoruba artisans renowned for their ivory carvings, the vessel often featured motifs reflecting royal power, such as the fish-legged king flanked by attendants—an influence from neighboring Benin. Owo’s art blended stylistic elements of both Ife and Benin traditions, shaped by its geographic and historical ties. Today, these vessels are rare and highly valued, regarded as significant examples of African art preserved in museum collections and specialized art markets.",
+                ]
+            },
+            {
+                id: 5,
+                name: "Benin Bronze Head",
+                monarch: "16th Century",
+                image: "images/a3.jpg",
+                details: [
+                    "The Head of a Queen Mother (Iyoba) is a celebrated example of Benin art from the historic Kingdom of Benin in modern-day Nigeria. Created by the Edo people using the lost-wax technique, these works are often called “Benin Bronzes,” though they are primarily brass, sometimes combined with ivory or wood. Commissioned for ancestral altars of Obas and Queen Mothers, they played a central role in rituals honoring ancestors. Many were looted during the British invasion of Benin in 1897 and now reside in museums and private collections worldwide. Today, they symbolize both artistic mastery and the ongoing struggle for cultural restitution.",
+                    
+                ]
+            },
+            {
+                id: 6,
+                name: "Benin Palace Drum",
+                monarch: "16th Century",
+                image: "images/a10.jpg",
+                details: [
+                    "This palm-wood drum, stained dark brown and carved from a single log, was designed for resonance and ritual use. Its hollowed interior includes a diaphragm with a central irregular hole, possibly intentional for acoustics, alongside natural defects. The vessel-like body stands on eight triangular legs rising from a circular base, with decorative incised bands enhancing its craftsmanship. Measuring 25 inches wide, 23 inches across the top, and 32 inches tall, it reflects both artistry and function. Beaten in Benin’s royal palace during ancestor rites, it now embodies the history of African artifacts and the ongoing debates over cultural repatriation.",
+                    
+                ]
+            },
+            {
+                id: 7,
+                name: "Queen Idia Bronze Head",
+                monarch: "16th Century",
+                image: "images/a5.jpg",
+                details: [
+                    "This bronze head, created in the early sixteenth century using the lost-wax technique, portrays a young woman of the Benin court with striking realism. She wears the high pointed ukpe-okhue crown of coral beads and the distinctive “parrot’s beak” hairstyle, reserved for the Iyoba (Queen Mother) and major war chief. Inset iron bands above the eyes reference the oral tale of Idia, who became Iyoba and mother of Oba Esigie. Engraved cicatrices above the brows add symbolic detail. Commissioned by Esigie and crafted by Benin’s imperial brass-casters, the heads honored Idia's military achievements, ceremonial authority, and enduring legacy.",
+                    
+                ]
+            },
+            {
+                id: 8,
+                name: "Benin Bronze Leopard",
+                monarch: "13th Century - 16th Century",
+                image: "images/a6.jpg",
+                details: [
+                    "The Benin Bronze Leopard is an iconic artwork from the historic Kingdom of Benin in present-day Nigeria. Leopards symbolized strength, leadership, and royal authority, with the Oba often called the “Leopard of the House.” Crafted in brass or ivory using the lost-wax technique by the Royal Bronze Casters Guild, these sculptures adorned the palace, serving both decorative and symbolic roles. Many original leopards were looted during the British invasion of 1897 and now reside in museums and private collections worldwide. Today, replicas and contemporary versions are still produced in Benin City, while originals remain prized cultural treasures.",
+                ]
+            },
+            {
+                id: 9,
+                name: "Edo Oba Bronze Head",
+                monarch: "16th Century",
+                image: "images/a12.webp",
+                details: [
+                    "The Head of an Oba is a brass sculpture created by Edo artists in the royal court of Benin during the 16th century. Made using the lost-wax casting technique, it represents the Oba (king) with striking realism and symbolic regalia, emphasizing his authority and divine role. Such heads were commissioned for ancestral altars to honor past rulers and reinforce dynastic continuity. This particular piece, now housed in the Metropolitan Museum of Art in New York City, reflects the sophistication of Benin's court art and its enduring cultural significance as one of the most celebrated achievements of African bronze casting",
+                    
+                ]
+            },
+            {
+                id: 10,
+                name: "Attah of Idah",
+                monarch: "16th Century",
+                image: "images/a8.jpg",
+                details: [
+                    "Early in Oba Esigie's reign, the Kingdom of Benin clashed with Idah, a state on the Middle Niger River, over control of trade routes to the coast. The attah of Idah advanced his armies to the gates of Benin City but was ultimately repelled and defeated. This victory secured Benin's dominance over regional trade, a control maintained until the late 19th century. Scholars argue that the mounted rider depicted in this sculpture represents the defeated attah, symbolizing Benin’s triumph and the consolidation of its economic and political power during Esigie's rule.",
+                    
+                ]
+            },
+            {
+                id: 11,
+                name: "Iyoba Ivory Mask",
+                monarch: "16th Century",
+                image: "images/a15.webp",
+                details: [
+                    "The Queen Mother (Iyoba) pendant mask is a renowned ivory sculpture created by Edo artists in the 16th century at the royal court of Benin, in present-day Nigeria. Crafted with exceptional skill, it depicts the Iyoba, symbolizing her authority and spiritual significance within the kingdom. Such masks were worn or displayed during important ceremonies, emphasizing the Queen Mother’s role in supporting the Oba and ensuring dynastic continuity. Made from ivory, a material linked to purity and prestige, this masterpiece now resides in the Metropolitan Museum of Art in New York City, representing Benin's artistic brilliance and cultural legacy.",
+                    
+                ]
+            },
+            {
+                id: 12,
+                name: "Edo Oba Hip Mask",
+                monarch: "Replica",
+                image: "images/a16.png",
+                details: [
+                    "Benin brass hip pendants typically depict the Oba, the ruler of Benin, and symbolize royal authority. The mask’s ornaments include stylized mudfish forming a beard, rows of beads on the forehead, a beaded net headdress, and coral bead motifs. In Benin culture, mudfish represent power and duality, living both on land and in water, and are linked to Olokun, the sea god and patron of royalty. Coral beads further signify wealth and status. Worn on the left hip by chiefs and high-ranking officials as part of ceremonial regalia, these pendants mark rank, loyalty, and devotion to the Oba's divine rule.",
+                    
+                ]
+            },
+            
+            {
+                id: 13,
+                name: "Leopard Head Brass Mask",
+                monarch: "17th Century",
+                image: "images/benin6.jpeg",
+                details: [
+                    "The leopard, a symbol of strength and military power, was closely associated with the Oba of Benin. Brass leopard-head waist pendants served as insignia for Benin’s militia, though they are no longer worn since the kingdom lacks a standing army. Ivory pendants were rarer, reserved for the Oba or high-ranking officers like the iyase or ezomo. This example features holes representing leopard spots, once inlaid with brass, and loops along the jawline from which bells dangled. The piece reflects both artistry and symbolism, embodying the leopard's role as a powerful counterpart to the king's authority.",
+                    
+                ]
+            },
+            {
+                id: 14,
+                name: "Benin Leopard Pair",
+                monarch: "The Soun of Ogbomoso",
+                image: "images/a20.jpg",
+                details: [
+                    "The Oba of Benin is revered as a sacred monarch, embodying a living connection to ancestors and deities. Believed to transcend human limitations such as illness, sleep, or even death, he symbolizes divine authority. Metaphorically called “the leopard of the house,” the Oba is closely associated with the leopard, a creature admired for its beauty, cunning, and power. Leopard imagery appears prominently in Benin's royal arts, reflecting both spiritual and military strength. Before the British invasion of 1897, domesticated leopards were kept in the palace, demonstrating the Oba's mastery over nature and reinforcing his role as a powerful ruler.",
+                    
+                ]
+            },
+            {
+                id: 15,
+                name: "Oba Ewuakpe with Altar Group",
+                monarch: "18th Century",
+                image: "images/a21.jpg",
+                details: [
+                    "This 18th-century sculpture depicts Oba Akenzua I, who reigned from about 1713 to 1734, distinguished by his regal attire—an ivory and coral crown, high collar, and a staff showing an oba atop an elephant, commemorating military victory. He is flanked by two palace attendants (enobore), with hieratic scale emphasizing his supreme importance. At the base, bound and decapitated figures symbolize his triumph over his brother, a rival to the throne. Created as a commemorative piece for a royal ancestral altar in the palace, the work reflects the bulky, hierarchical style of 17th-century altar groups. Today, it is preserved in the Ethnologisches Museum in Berlin.",
+                    
+                ]
+            },
+            
+            {
+                id: 16,
+                name: "Benin relief plaque",
+                monarch: "16th Century",
+                image: "images/a22.jpg",
+                details: [
+                    "The Benin plaques vividly record court life, rituals, and military campaigns of the 16th and 17th centuries. At their center stands the Oba, distinguished by coral bead regalia, flanked by attendants, with hierarchical scale emphasizing his supreme importance. Originally nailed to the wooden pillars of the Oba’s palace in Benin City, they created the impression of solid brass columns while documenting the kingdom’s history. Looted during the British invasion of 1897, thousands were dispersed into museums and private collections worldwide. Today, the Benin Bronzes symbolize Africa’s struggle for cultural restitution, with major collections in the British Museum and across Europe and the U.S., and recent repatriation efforts by Germany, the Netherlands, and UK institutions returning works to Nigeria.",
+                    
+                ]
+            },
+            {
+                id: 17,
+                name: "Afro-Portuguese ivory salt cellar",
+                monarch: "16th Century",
+                image: "images/a23.jpg",
+                details: [
+                    "This 16th-century Afro-Portuguese ivory salt cellar from the Kingdom of Benin was crafted for the European market. Carved from a single elephant tusk, it stands about 10 inches (25 cm) high. The intricate design depicts four European figures—two richly dressed men and their attendants—and includes a receptacle for salt topped by a ship. This piece exemplifies the artistry of Benin’s hereditary, male-only guild of ivory carvers, whose skillful work blended local traditions with motifs reflecting cross-cultural exchange during the era of early European contact.",
+                    
+                ]
+            },
+            {
+                id: 18,
+                name: "Oba Ovonramwen's Stool (Agba)",
+                monarch: "19th Century",
+                image: "images/a24.jpeg",
+                details: [
+                    "Oba Ovonramwen's Stool (Agba), also known in Edo tradition as Erhe, is a late 19th-century royal throne from Benin. Considered the oldest form of throne in the kingdom, it is a rectangular chair composed of interlocking parts, richly carved with ornaments and figurative scenes. The carvings depict the Oba in coral regalia, a European man in a boat, cowrie shells, and a boa constrictor, symbolizing wealth, trade, and ancestral power. As a sacred object, the stool embodied authority and harmony between nature and the ancestors. Looted during the British Punitive Expedition of 1897, it holds particular historical resonance, as accounts state Oba Ovonramwen was seated on this very stool when he was sentenced to exile in 1898.",
+                    
+                ]
+            }
+        ];
+
+      // 4. Render the Grid
+const gridContainer = document.getElementById('kingdomsGrid');
+
+kingdomsData.forEach(kingdom => {
+    const card = document.createElement('div');
+    card.className = 'kingdom-card';
+    card.onclick = () => openModal(kingdom.id);
+    
+    // WE ADDED THE IMG TAG HERE 👇
+    card.innerHTML = `
+        <img src="${kingdom.image}" alt="${kingdom.name}" class="card-img-top">
+        <h3 class="kingdom-title">${kingdom.name}</h3>
+        <div class="monarch-title">${kingdom.monarch}</div>
+        <button class="card-btn">More Info</button>
+    `;
+    
+    gridContainer.appendChild(card);
+});
+       // 5. Modal Logic
+const modal = document.getElementById('kingdomModal');
+const mTitle = document.getElementById('modalTitle');
+const mMonarch = document.getElementById('modalMonarch');
+const mBody = document.getElementById('modalBody');
+// NEW REFERENCE 👇
+const mImage = document.getElementById('modalImageDisplay'); 
+
+function openModal(id) {
+    const data = kingdomsData.find(k => k.id === id);
+    if(data) {
+        mTitle.textContent = data.name;
+        mMonarch.textContent = data.monarch;
+        
+        // INJECT IMAGE SOURCE HERE 👇
+        mImage.src = data.image; 
+        
+        const listHtml = `<ul>${data.details.map(d => `<li>${d}</li>`).join('')}</ul>`;
+        mBody.innerHTML = listHtml;
+        
+        modal.style.display = 'flex';
+    }
+}
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal if clicking outside content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
