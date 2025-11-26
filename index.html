@@ -7,6 +7,365 @@
     <link rel="stylesheet" href="global.css">
     
     <style>
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* Gradient matching Tribal Dark theme */
+            background: linear-gradient(180deg,
+                    rgba(18, 18, 18, 0.98) 0%,
+                    rgba(18, 18, 18, 0.9) 50%,
+                    rgba(18, 18, 18, 0) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid #008751; /* Green accent on scroll */
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px; /* Slight adjustment for better spacing */
+            transition: padding 0.3s ease;
+        }
+
+        .header.scrolled .nav-container {
+            padding: 10px 30px; /* Shrinks slightly on scroll */
+        }
+
+        /* Nav Links for Demo */
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #FFD700; /* Tribal Gold */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            /* Add a subtle bounce on hover */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            position: relative;
+            /* "Drumbeat" Animation: Beat-Beat-Pause */
+            animation: tribalPulse 3s infinite;
+        }
+
+        /* THE SHAPE CONTAINER */
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* THE CORE SHAPE (Modified for Pattern) */
+        .prism-shape {
+            width: 35px;
+            height: 35px;
+            position: relative;
+            transform: rotate(45deg); /* Keeps your diamond base */
+            
+            /* TRIBAL PATTERN GENERATOR */
+            background: 
+                /* Gold accent center */
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                /* Woven stripes */
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            
+            /* Sharp borders for a "cut" look */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* CREATING THE STAR/FLOWER GEOMETRY */
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px; /* Cover border */
+            background: inherit; /* Inherit the tribal pattern */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before {
+            transform: rotate(60deg);
+        }
+
+        .prism-shape::after {
+            transform: rotate(-60deg);
+        }
+
+        /* TYPOGRAPHY */
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            /* Gradient text using the palette */
+            background: linear-gradient(90deg, #066e25, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* The decorative sub-line */
+        .logo-text .flux {
+            height: 6px;
+            width: 100%;
+            margin-top: 4px;
+            /* Zig-Zag "Embroidery" Pattern */
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 10px 10px;
+            background-color: #008751;
+        }
+
+        /* ANIMATIONS */
+        
+        /* Mimics a heartbeat or drum rhythm */
+        @keyframes tribalPulse {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.15); } /* Beat */
+            10% { transform: scale(1); }
+            15% { transform: scale(1.15); } /* Beat */
+            30% { transform: scale(1); }    /* Pause... */
+            100% { transform: scale(1); }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #121212; /* Tribal Dark */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-prism {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 0 auto 30px;
+        }
+
+        .prism-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent; /* Increased slightly for visibility */
+            transform-origin: center;
+            animation: prismRotate 3s linear infinite;
+            box-sizing: border-box;
+        }
+
+        .prism-face:nth-child(1) {
+            /* Clay to Green */
+            border-image: linear-gradient(45deg, #D2691E, #008751) 1;
+            animation-delay: 0s;
+        }
+
+        .prism-face:nth-child(2) {
+            /* Green to Gold */
+            border-image: linear-gradient(45deg, #008751, #FFD700) 1;
+            transform: rotate(60deg);
+            animation-delay: 0.2s;
+        }
+
+        .prism-face:nth-child(3) {
+            /* Gold to Clay */
+            border-image: linear-gradient(45deg, #FFD700, #D2691E) 1;
+            transform: rotate(120deg);
+            animation-delay: 0.4s;
+        }
+
+        .loading-text {
+            color: #FFD700;
+            font-family: monospace;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        @keyframes prismRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.8); /* Slight shrink for 'breathing' effect */
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+             .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1002; /* Ensure logo stays above menu on mobile */
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+            position: relative;
+            animation: tribalPulse 3s infinite;
+        }
+
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prism-shape {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            transform: rotate(45deg);
+            background: 
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: inherit;
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before { transform: rotate(60deg); }
+        .prism-shape::after { transform: rotate(-60deg); }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            background: linear-gradient(90deg, #f4f4f4, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .flux {
+            height: 4px;
+            width: 100%;
+            margin-top: 3px;
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 8px 8px;
+            background-color: #008751;
+        }
+        
+
         /* --- EXISTING MODAL STYLES (Keep these) --- */
 .skills-hexagon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); gap: 40px; padding: 20px; }
 .kingdom-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(5px); cursor: pointer; position: relative; overflow: hidden; }
@@ -255,6 +614,17 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     /* Grid to single column */
     .skills-hexagon-grid { grid-template-columns: 2fr; gap: 25px; padding: 12px; }
     .kingdom-card { padding: 14px; font-size: 0.95rem; }
+    .contact-section { padding: 20px 10px; }
+    .contact-container { 
+        overflow: hidden;
+        
+     }
+       .contact-info {
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 0px;
+    margin-bottom: 1px;
+  }
 
     /* Reduce heavy shadows/reflections for performance on low-end devices */
     .coverflow-item { -webkit-box-reflect: none; box-shadow: 0 6px 18px rgba(0,0,0,0.45); }
@@ -282,6 +652,7 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
 .skills-section {
     background-image: url("images/back4.png");
     background-size: 400px;
+    
 }
 
 
@@ -596,13 +967,20 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     </div>
 
     <script>
-        // 1. Remove Loader
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('loader');
+         window.addEventListener('load', () => {
+            const loader = document.querySelector('.loader');
+            // Timeout is just for demo purposes so you can see the animation
             setTimeout(() => {
-                loader.style.display = 'none';
+                loader.classList.add('hidden');
             }, 1000);
         });
+        // 1. Remove Loader
+        //window.addEventListener('load', function() {
+            //const loader = document.getElementById('loader');
+            //setTimeout(() => {
+           //     loader.style.display = 'none';
+           // }, 1000);
+       // });
 
         // 2. Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');

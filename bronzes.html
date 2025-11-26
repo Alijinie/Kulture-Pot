@@ -7,6 +7,361 @@
     <link rel="stylesheet" href="global.css">
     
     <style>
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            /* Add a subtle bounce on hover */
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            position: relative;
+            /* "Drumbeat" Animation: Beat-Beat-Pause */
+            animation: tribalPulse 3s infinite;
+        }
+
+        /* THE SHAPE CONTAINER */
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* THE CORE SHAPE (Modified for Pattern) */
+        .prism-shape {
+            width: 35px;
+            height: 35px;
+            position: relative;
+            transform: rotate(45deg); /* Keeps your diamond base */
+            
+            /* TRIBAL PATTERN GENERATOR */
+            background: 
+                /* Gold accent center */
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                /* Woven stripes */
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            
+            /* Sharp borders for a "cut" look */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* CREATING THE STAR/FLOWER GEOMETRY */
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px; /* Cover border */
+            background: inherit; /* Inherit the tribal pattern */
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before {
+            transform: rotate(60deg);
+        }
+
+        .prism-shape::after {
+            transform: rotate(-60deg);
+        }
+
+        /* TYPOGRAPHY */
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            /* Gradient text using the palette */
+            background: linear-gradient(90deg, #04682a, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* The decorative sub-line */
+        .logo-text .flux {
+            height: 6px;
+            width: 100%;
+            margin-top: 4px;
+            /* Zig-Zag "Embroidery" Pattern */
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 10px 10px;
+            background-color: #008751;
+        }
+
+        /* ANIMATIONS */
+        
+        /* Mimics a heartbeat or drum rhythm */
+        @keyframes tribalPulse {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.15); } /* Beat */
+            10% { transform: scale(1); }
+            15% { transform: scale(1.15); } /* Beat */
+            30% { transform: scale(1); }    /* Pause... */
+            100% { transform: scale(1); }
+        }
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #121212; /* Tribal Dark */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-prism {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            margin: 0 auto 30px;
+        }
+
+        .prism-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent; /* Increased slightly for visibility */
+            transform-origin: center;
+            animation: prismRotate 3s linear infinite;
+            box-sizing: border-box;
+        }
+
+        .prism-face:nth-child(1) {
+            /* Clay to Green */
+            border-image: linear-gradient(45deg, #D2691E, #008751) 1;
+            animation-delay: 0s;
+        }
+
+        .prism-face:nth-child(2) {
+            /* Green to Gold */
+            border-image: linear-gradient(45deg, #008751, #FFD700) 1;
+            transform: rotate(60deg);
+            animation-delay: 0.2s;
+        }
+
+        .prism-face:nth-child(3) {
+            /* Gold to Clay */
+            border-image: linear-gradient(45deg, #FFD700, #D2691E) 1;
+            transform: rotate(120deg);
+            animation-delay: 0.4s;
+        }
+
+        .loading-text {
+            color: #FFD700;
+            font-family: monospace;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        @keyframes prismRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.8); /* Slight shrink for 'breathing' effect */
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+.header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* Gradient matching Tribal Dark theme */
+            background: linear-gradient(180deg,
+                    rgba(18, 18, 18, 0.98) 0%,
+                    rgba(18, 18, 18, 0.9) 50%,
+                    rgba(18, 18, 18, 0) 100%);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(18, 18, 18, 0.98);
+            backdrop-filter: blur(30px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid #008751; /* Green accent on scroll */
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px; /* Slight adjustment for better spacing */
+            transition: padding 0.3s ease;
+        }
+
+        .header.scrolled .nav-container {
+            padding: 10px 30px; /* Shrinks slightly on scroll */
+        }
+
+        /* Nav Links for Demo */
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #FFD700; /* Tribal Gold */
+        }
+     .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1002; /* Ensure logo stays above menu on mobile */
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 12px;
+            position: relative;
+            animation: tribalPulse 3s infinite;
+        }
+
+        .logo-prism {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .prism-shape {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            transform: rotate(45deg);
+            background: 
+                radial-gradient(circle at center, #FFD700 20%, transparent 21%),
+                repeating-linear-gradient(
+                    135deg,
+                    #008751 0px,
+                    #008751 5px,
+                    #121212 5px,
+                    #121212 10px,
+                    #D2691E 10px,
+                    #D2691E 15px
+                );
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .prism-shape::before,
+        .prism-shape::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: inherit;
+            border: 2px solid #121212;
+            box-sizing: border-box;
+            z-index: -1;
+        }
+
+        .prism-shape::before { transform: rotate(60deg); }
+        .prism-shape::after { transform: rotate(-60deg); }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .logo-text .prism {
+            background: linear-gradient(90deg, #f4f4f4, #008751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text .flux {
+            height: 4px;
+            width: 100%;
+            margin-top: 3px;
+            background: 
+                linear-gradient(135deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(225deg, #D2691E 25%, transparent 25%) -10px 0,
+                linear-gradient(315deg, #D2691E 25%, transparent 25%),
+                linear-gradient(45deg, #D2691E 25%, transparent 25%);	
+            background-size: 8px 8px;
+            background-color: #008751;
+        }
+
         /* --- EXISTING MODAL STYLES (Keep these) --- */
 .skills-hexagon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); gap: 40px; padding: 20px; }
 .kingdom-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(5px); cursor: pointer; position: relative; overflow: hidden; }
@@ -286,6 +641,7 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
 }
 
 
+
 </style>
     
     <style>
@@ -373,6 +729,165 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     color: var(--text-primary);
 	box-shadow: 0 5px 20px rgba(153, 69, 255, 0.3);
     }
+
+/* From Uiverse.io by ilkhoeri */ 
+/* --- Layout Container --- */
+.contact-section {
+  padding: 40px 20px;
+  background: #1a1a1a; /* Dark background works best for your 3D lighting */
+  color: white;
+  overflow: hidden; /* Prevents scrollbars if 3D elements poke out */
+}
+
+.contact-container {
+  display: flex;
+  align-items: center; /* Vertically centers the text with the carousel */
+  justify-content: center;
+  gap: 2rem; /* Space between text and carousel */
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 500px; /* Ensures the section has height */
+}
+
+/* --- Left Side: Info --- */
+.contact-info {
+  flex: 1; /* Takes up half the space */
+  z-index: 10; /* Ensures text stays on top */
+  padding: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.info-icon {
+  font-size: 1.5rem;
+}
+
+.info-text h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}
+
+.info-text p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #a0a0a0;
+}
+
+/* --- Right Side: 3D Carousel Wrapper --- */
+.wrapper {
+  flex: 1; /* Takes up the other half */
+  height: 500px; /* CRITICAL: Needs fixed height to render 3D context */
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* perspective: 1000px; Remove this if using it in .inner, but good for container */
+}
+
+/* --- Your Existing Carousel CSS (Unchanged) --- */
+.inner {
+  --w: 100px;
+  --h: 150px;
+  --translateZ: calc((var(--w) + var(--h)) + 0px);
+  --rotateX: -15deg;
+    --perspective: 800px;
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective));
+  animation: rotating 20s linear infinite;
+  /* Centering fix since wrapper is flex: */
+  top: auto; 
+  left: auto;
+}
+
+@keyframes rotating {
+  from {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn);
+  }
+}
+
+.card {
+  position: absolute;
+  border: 2px solid rgba(var(--color-card));
+  border-radius: 12px;
+  overflow: hidden;
+  inset: 0;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: radial-gradient(
+      circle,
+      rgba(var(--color-card), 0.2) 0%,
+      rgba(var(--color-card), 0.6) 80%,
+      rgba(var(--color-card), 0.9) 100%
+  );
+}
+
+.img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .contact-section {
+     /* CRITICAL: Allows the 3D elements to poke out vertically without getting cut */
+     overflow: hidden;
+
+  .contact-container {
+    flex-direction: column;
+    gap: 4rem; /* Increased gap so the spinning cards don't hit the text above */
+  }
+  
+  .wrapper {
+    width: 100%;
+    height: 250px; /* Slightly reduced height */
+    /* Ensure the wrapper itself doesn't clip the 3D content */
+    overflow: visible; 
+    
+  }
+
+  .inner {
+    /* CRITICAL FIX: This shrinks the whole 3D carousel to 70% size 
+       so the rotation radius fits inside the mobile screen width */
+    transform: perspective(var(--perspective)) scale(0.5); 
+    
+    /* OPTIONAL: Push it down slightly if it's hitting the text */
+    top: -150%; 
+  }
+  
+  .contact-info {
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 0px;
+    margin-bottom: 1px;
+    /* Add a background or z-index to ensure text sits 'behind' or 'above' correctly */
+    z-index: 8; 
+    margin-bottom: -10px;
+  }
+}}
 
     </style>
     
@@ -535,8 +1050,8 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
         <div class="coverflow-item prev" data-index="13">
             <div class="cf-image" style="background-image: url('images/a8.jpg'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Uhunmwu-Elao</div>
-                <div class="cf-subtitle">Linden Museum Stuttgart-Germany</div>
+                <div class="cf-title">Attah of Idah</div>
+                <div class="cf-subtitle">British Museum, London</div>
             </div>
         
         </div>
@@ -568,49 +1083,86 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     </section>
 
     <section class="contact-section" id="contact">
-        <div class="section-header">
-            
+ 
+
+  <div class="contact-container">
+    <div class="contact-info">
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <h4>Region</h4>
+          <p>South West, Nigeria</p>
         </div>
-        
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="info-item">
-                    <div class="info-icon">📍</div>
-                    <div class="info-text">
-                        <h4>Region</h4>
-                        <p>South West, Nigeria</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">📧</div>
-                    <div class="info-text">
-                        <h4>Email</h4>
-                        <p>contact@yorubaheritage.com</p>
-                    </div>
-                </div>
-            </div>
-            
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">📧</div>
+        <div class="info-text">
+          <h4>Email</h4>
+          <p>contact@yorubaheritage.com</p>
         </div>
-    </section>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="inner" style="--quantity: 10;">
+        <div class="card" style="--index: 0;--color-card: 142, 249, 252;">
+          <div class="img">
+             <img src="images/a6.jpg" alt="Benin Mask" />
+          </div>
+        </div>
+        <div class="card" style="--index: 1;--color-card: 142, 252, 157;">
+          <div class="img">
+            <img src="images/a2.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="background-image: url('images/oyo.jpeg'); background-size: cover; background-position: center;">
+          <div class="img"></div>
+        </div>
+        <div class="card" style="--index: 2;--color-card: 142, 252, 157;">
+          <div class="img">
+            <img src="images/a3.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 3;--color-card: 215, 252, 142;">
+          <div class="img">
+            <img src="images/a5.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 4;--color-card: 252, 252, 142;">
+          <div class="img">
+            <img src="images/a10.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 5;--color-card: 252, 208, 142;">
+          <div class="img">
+            <img src="images/a1.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 6;--color-card: 252, 142, 142;">
+          <div class="img">
+            <img src="images/a9.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 7;--color-card: 252, 142, 239;">
+          <div class="img">
+            <img src="images/a7.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 8;--color-card: 204, 142, 252;">
+          <div class="img">
+            <img src="images/a8.jpg"/>
+          </div>
+        </div>
+        <div class="card" style="--index: 9;--color-card: 142, 202, 252;">
+          <div class="img">
+            <img src="images/a4.jpg"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <footer class="footer">
         <div class="footer-content">
@@ -813,28 +1365,22 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
             },
             {
                 id: 9,
-                name: "Iwo Kingdom",
-                monarch: "The Oluwo of Iwo",
-                image: "images/iwo.jpeg",
+                name: "Edo Oba Bronze Head",
+                monarch: "16th Century",
+                image: "images/a12.webp",
                 details: [
-                    "The Oluwo of Iwo is a vibrant monarch, recognized for blending age-old traditions with modern reforms that resonate with today’s society.",
-                    "Located in Osun State, Iwo holds an important place in Yoruba history, serving as a center of cultural identity and continuity.",
-                    "The kingdom emphasizes youth engagement and cultural revival, ensuring that younger generations remain connected to Yoruba heritage while embracing innovation.",
-                    `✨ Did you know?
-                    The Oluwo of Iwo is one of the most outspoken Yoruba monarchs, often championing cultural pride and reform in contemporary Nigeria.`
+                    "The Head of an Oba is a brass sculpture created by Edo artists in the royal court of Benin during the 16th century. Made using the lost-wax casting technique, it represents the Oba (king) with striking realism and symbolic regalia, emphasizing his authority and divine role. Such heads were commissioned for ancestral altars to honor past rulers and reinforce dynastic continuity. This particular piece, now housed in the Metropolitan Museum of Art in New York City, reflects the sophistication of Benin's court art and its enduring cultural significance as one of the most celebrated achievements of African bronze casting",
+                    
                 ]
             },
             {
                 id: 10,
-                name: "Ikere Kingdom",
-                monarch: "The Ogoga of Ikere",
-                image: "images/ikere.jpg",
+                name: "Attah of Idah",
+                monarch: "16th Century",
+                image: "images/a8.jpg",
                 details: [
-                    "The Ikere Kingdom, situated in Ekiti State, stands as a vital center of Yoruba culture and tradition.",
-                    "Its monarch is highly regarded, wielding influence in both Ekiti politics and cultural life, ensuring continuity of heritage and governance.",
-                    "Ikere’s traditions are deeply rooted in Yoruba mythology, reinforcing its spiritual and historical connection to the broader Yoruba civilization.",
-                    `✨ Did you know?
-                    Ikere is home to sacred sites and festivals that celebrate its mythological origins, linking the community directly to Yoruba ancestral narratives.`
+                    "Early in Oba Esigie's reign, the Kingdom of Benin clashed with Idah, a state on the Middle Niger River, over control of trade routes to the coast. The attah of Idah advanced his armies to the gates of Benin City but was ultimately repelled and defeated. This victory secured Benin's dominance over regional trade, a control maintained until the late 19th century. Scholars argue that the mounted rider depicted in this sculpture represents the defeated attah, symbolizing Benin’s triumph and the consolidation of its economic and political power during Esigie's rule.",
+                    
                 ]
             },
             {
