@@ -364,7 +364,7 @@
 
         /* --- EXISTING MODAL STYLES (Keep these) --- */
 .skills-hexagon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 3fr)); gap: 40px; padding: 20px; }
-.kingdom-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(5px); cursor: pointer; position: relative; overflow: hidden; }
+.kingdom-card { background: rgba(100, 74, 1, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(6px) brightness(60%); cursor: pointer; position: relative; overflow: hidden; }
 .kingdom-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan, #00f2ff); box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1); }
 .kingdom-title { color: #fff; font-size: 1.4rem; margin-bottom: 10px; font-weight: bold; }
 .monarch-title { color: var(--accent-cyan, #00f2ff); font-size: 1rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
@@ -389,7 +389,7 @@
     #01211b 5%,   /* Rich Orchid/Purple */
     #002821 40%,  /* Deep Plum */
     #012b12 100%  /* Black */);
-    background-color: #01211b;
+    background-color: #a05703;
   background-image: 
 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 
@@ -734,12 +734,15 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
 /* --- Layout Container --- */
 .contact-section {
   padding: 40px 20px;
-  background: #1a1a1a; /* Dark background works best for your 3D lighting */
+  
+ background:#db942a;/* Dark background works best for your 3D lighting */
   color: white;
   overflow: hidden; /* Prevents scrollbars if 3D elements poke out */
 }
 
 .contact-container {
+    background-image: url("images/bak4.png");
+    background-size: 400px;
   display: flex;
   align-items: center; /* Vertically centers the text with the carousel */
   justify-content: center;
@@ -971,10 +974,10 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
         </div>
 
         <div class="coverflow-item prev-2" data-index="4">
-            <div class="cf-image" style="background-image: url('images/d2.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-image" style="background-image: url('images/osun.jpg'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Okpia</div>
-                <div class="cf-subtitle">Detroit Institute of Arts-USA</div>
+                <div class="cf-title">Osun Festival</div>
+                <div class="cf-subtitle">Osogbo, Osun State</div>
             </div>
         </div>
 
@@ -1288,11 +1291,11 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
         const kingdomsData = [
             {
                 id: 1,
-                name: "AMA",
-                monarch: "16 Century to 17th Century",
-                image: "images/ama.jpg",
+                name: "Osun Festival",
+                monarch: "Osogbo, Osun State",
+                image: "images/osun.jpg",
                 details: [
-                    "This piece depicts the Oba of Benin with mudfish legs, symbolizing his spiritual connection to water and the divine. Facing forward, he grasps a leopard by the tail in each hand, representing royal authority and power. The Oba wears a cylindrical beaded crown with an oro protrusion and three ornamental beads, along with a deep beaded collar, tunic, and a patterned skirt adorned with pendant masks of animal heads. Two mudfish hang from his waist belt, reinforcing aquatic symbolism. The leopards, shown in profile, wear collars with bells, emphasizing their domestication and the Oba's mystical control over nature and animals.",    
+                    "The Osun Festival, held annually in Osogbo, Osun State, is a vibrant celebration dedicated to Osun (Oshun), the revered Orisha of divinity, femininity, fertility, beauty, love, and destiny. Rooted in tradition, the event renews a sacred covenant between the Osogbo community and the goddess, who is believed to have guided them to safety centuries ago. Devotees gather to offer prayers, seek blessings—especially for fertility—and express gratitude. The climax unfolds at the UNESCO-recognized Osun Sacred Grove along the Osun River, one of the last sacred Yoruba forests. The festival draws thousands of worshippers and tourists from Nigeria, the US, UK, Brazil, Cuba, and Jamaica.",    
                 ]
             },
             {
