@@ -532,7 +532,7 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
 .modal-hero-image {
     width: 100%;
     height: 80px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
     border: 1px solid var(--accent-green);
@@ -942,18 +942,18 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     <div class="coverflow-scene" id="coverflow-scene">
         
         <div class="coverflow-item active" data-index="0">
-            <div class="cf-image" style="background-image: url('images/d1.jpeg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-image" style="background-image: url('images/d11.webp'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Uhunmwu-Ẹkuẹ</div>
-                <div class="cf-subtitle">Pennsylvania Museum-USA</div>
+                <div class="cf-title">Kano Durbar Festival</div>
+                <div class="cf-subtitle">Kano State</div>
             </div>
         </div>
 
         <div class="coverflow-item next" data-index="1">
             <div class="cf-image" style="background-image: url('images/k1.jpg'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Ama</div>
-                <div class="cf-subtitle">British Museum-London</div>
+                <div class="cf-title">Calabar Carnival</div>
+                <div class="cf-subtitle">Cross River State</div>
             </div>
         </div>
 
@@ -982,19 +982,19 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
         </div>
 
         <div class="coverflow-item prev" data-index="5">
-            <div class="cf-image" style="background-image: url('images/d6.jpeg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-image" style="background-image: url('images/g1.jpg'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Uhunmwu-Elao</div>
-                <div class="cf-subtitle">Linden Museum Stuttgart-Germany</div>
+                <div class="cf-title">Gamji Cultural Festival</div>
+                <div class="cf-subtitle">Bauchi State</div>
             </div>
         
         </div>
 
         <div class="coverflow-item prev" data-index="6">
-            <div class="cf-image" style="background-image: url('images/d5.jpg'); background-size: cover; background-position: center;"></div>
+            <div class="cf-image" style="background-image: url('images/k2.jpg'); background-size: cover; background-position: center;"></div>
             <div class="cf-content">
-                <div class="cf-title">Ooni-ife Sculpture</div>
-                <div class="cf-subtitle">British Museum-London</div>
+                <div class="cf-title">Argungu Fishing Festival</div>
+                <div class="cf-subtitle">Kebbi State</div>
             </div>
         
         </div>
@@ -1291,69 +1291,71 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
         const kingdomsData = [
             {
                 id: 1,
+                name: "Kano Durbar Festival",
+                monarch: "Kano State",
+                image: "images/d11.webp",
+                details: [
+                    "The Kano Durbar Festival is one of Nigeria’s most spectacular cultural celebrations, renowned for its grandeur, history, and vibrant pageantry. Held in Kano during the Islamic holidays of Eid al-Fitr and Eid al-Adha, the festival transforms the ancient city into a dazzling display of royalty, horsemanship, and tradition. Hundreds of horsemen dressed in ornate robes and turbans parade through the streets, accompanied by the rhythm of drums, blaring trumpets, and cheering crowds. At the heart of the celebration is the Emir of Kano, who leads the procession on a richly adorned horse, symbolizing authority and heritage",
+                    
+                ]
+                
+            },
+            {
+                id: 2,
+                name: "Gamji Cultural Festival",
+                monarch: "Bauchi State",
+                image: "images/g1.jpg",
+                details: [
+                    "The Gamji Cultural Festival in Nigeria is an annual celebration organized by Gamji Memorial Clubs, student-led groups in universities and higher institutions under the Gamji Members’ Association. Founded in 1988, the association honors Sir Ahmadu Bello, the Sardauna of Sokoto and former Premier of Northern Nigeria, who was nicknamed “Gamji” after the Hausa word for the baobab tree, symbolizing strength, unity, and leadership. The festival highlights Nigeria’s cultural diversity, tribal heritage, and traditions, with strong emphasis on northern cultures while embracing national elements. It promotes unity, cultural preservation, and community engagement through vibrant carnivals, performances, and student-centered activities.",
+                    
+                ]
+            },
+            {
+                id: 3,
+                name: "Dutse Durbar Festival",
+                monarch: "Jigawa State",
+                image: "images/d10.webp",
+                details: [
+                    "The Dutse Durbar in Jigawa State is a historic cultural festival rooted in pre-colonial military parades, where emirs inspected cavalry. Over time, it evolved into a grand spectacle of Hausa-Fulani traditions, symbolizing unity, strength, and regal authority. Celebrated during Eid al-Fitr and Eid al-Adha, it features colorful horse processions, trumpets, hunting guns, and vibrant attire. The Emir of Dutse, Emir Hameem Nuhu Sunusi, leads the procession with noblemen and horsemen, accompanied by music, dance, and homage. Recognized by UNESCO, the festival blends spirituality, heritage, and community pride, showcasing Jigawa's rich identity while preserving cultural traditions and honoring leadership.",
+                ]
+                
+            },
+            {
+               id: 4,
+                name: "Argungu Fishing Festival",
+                monarch: "Kebbi State",
+                image: "images/k2.jpg",
+                details: [
+                    "The Argungu Fishing Festival in Kebbi State is one of Nigeria’s most celebrated cultural events, showcasing the heritage of the Kebbi people. Established in 1934, it is held annually along the Matan Fada River and draws thousands of participants and spectators nationwide. The highlight is a dramatic fishing contest where fishermen dive into the river to catch the largest fish with their bare hands. Spanning four days, the festival also features music, dance, wrestling, and cultural displays that reflect local traditions. Recognized by UNESCO in 2016, it symbolizes unity, heritage, and Nigeria’s vibrant cultural identity, preserving tradition through celebration.",
+                    
+                ] 
+            },
+            {
+              id: 5,
                 name: "Osun Festival",
-                monarch: "Osogbo, Osun State",
+                monarch: "Osun State",
                 image: "images/osun.jpg",
                 details: [
                     "The Osun Festival, held annually in Osogbo, Osun State, is a vibrant celebration dedicated to Osun (Oshun), the revered Orisha of divinity, femininity, fertility, beauty, love, and destiny. Rooted in tradition, the event renews a sacred covenant between the Osogbo community and the goddess, who is believed to have guided them to safety centuries ago. Devotees gather to offer prayers, seek blessings—especially for fertility—and express gratitude. The climax unfolds at the UNESCO-recognized Osun Sacred Grove along the Osun River, one of the last sacred Yoruba forests. The festival draws thousands of worshippers and tourists from Nigeria, the US, UK, Brazil, Cuba, and Jamaica.",    
                 ]
             },
             {
-                id: 2,
-                name: "Okpia",
-                monarch: "14th Century",
-                image: "images/opia.webp",
-                details: [
-                    "This particular piece is closely tied to the Oba and is best described as court art. Its tradition of bronze casting dates back to the 14th century, influenced by Ife. Metalworkers produced heads, statues, ivory tusks, bells, and altar sticks, all intended for palace use. These objects were often placed on rectangular altars consecrated by a new Oba, serving as spiritual connections to his presence. The works symbolized royal authority and continuity, reminding people of the Oba and enabling communication with his spirit. The “regal dwarf” figure reflects this sacred artistic tradition, emphasizing the palace’s central role in Benin’s political and spiritual life.",
-                    
-                ]
-            },
-            {
-                id: 3,
-                name: "Ooni-ife Sculpture",
-                monarch: "12th Century - 15th Century",
-                image: "images/a1.jpg",
-                details: [
-                    "The Bronze Head from Ife is one of eighteen naturalistic copper alloy sculptures discovered in 1938 at Wunmonije Compound in Ife, Nigeria, the spiritual and former royal center of the Yoruba. Dating to the 12th–15th centuries C.E., it is believed to represent an Ooni (ruler) of Ife. The head features an elaborate beaded headdress, possibly a crown, and facial striations that signify high status and authority. Crafted using the sophisticated lost-wax technique, its realism and artistry astonished scholars, challenging Western misconceptions about African art and affirming the advanced metallurgical and cultural achievements of the Yoruba civilization.",
-                    
-                ]
-            },
-            {
-                id: 4,
-                name: "Owo Ivory Vessel",
-                monarch: "Owo Museum, Nigeria",
-                image: "images/a9.jpg",
-                details: [
-                    "The Owo ivory lidded vessel, known as udama or udamalore, symbolized high status and authority in the Owo Kingdom, an ancient Yoruba state in present-day Nigeria. Crafted by Yoruba artisans renowned for their ivory carvings, the vessel often featured motifs reflecting royal power, such as the fish-legged king flanked by attendants—an influence from neighboring Benin. Owo’s art blended stylistic elements of both Ife and Benin traditions, shaped by its geographic and historical ties. Today, these vessels are rare and highly valued, regarded as significant examples of African art preserved in museum collections and specialized art markets.",
-                ]
-            },
-            {
-                id: 5,
-                name: "Benin Bronze Head",
-                monarch: "16th Century",
-                image: "images/a3.jpg",
-                details: [
-                    "The Head of a Queen Mother (Iyoba) is a celebrated example of Benin art from the historic Kingdom of Benin in modern-day Nigeria. Created by the Edo people using the lost-wax technique, these works are often called “Benin Bronzes,” though they are primarily brass, sometimes combined with ivory or wood. Commissioned for ancestral altars of Obas and Queen Mothers, they played a central role in rituals honoring ancestors. Many were looted during the British invasion of Benin in 1897 and now reside in museums and private collections worldwide. Today, they symbolize both artistic mastery and the ongoing struggle for cultural restitution.",
-                    
-                ]
-            },
-            {
                 id: 6,
-                name: "Benin Palace Drum",
-                monarch: "16th Century",
-                image: "images/a10.jpg",
+                name: "Ofala Festival",
+                monarch: "Anambra State",
+                image: "images/o1.jpeg",
                 details: [
-                    "This palm-wood drum, stained dark brown and carved from a single log, was designed for resonance and ritual use. Its hollowed interior includes a diaphragm with a central irregular hole, possibly intentional for acoustics, alongside natural defects. The vessel-like body stands on eight triangular legs rising from a circular base, with decorative incised bands enhancing its craftsmanship. Measuring 25 inches wide, 23 inches across the top, and 32 inches tall, it reflects both artistry and function. Beaten in Benin’s royal palace during ancestor rites, it now embodies the history of African artifacts and the ongoing debates over cultural repatriation.",
+                    "The Ofala Festival in Anambra State, especially in Onitsha, is a grand cultural celebration that marks the annual emergence of the Obi (king) from seclusion. Traditionally held in October, it serves as a rite of renewal for the monarch and the kingdom. The festival features royal parades, dances, and tributes, highlighting heritage, unity, and cultural values. It signifies the king’s spiritual communion and blessings for his people, while also celebrating the rich identity of the Onicha Ado N’Idu kingdom. Historically, it marked the testing of new yams and the monarch’s review of his army, reinforcing loyalty and tradition.",
                     
                 ]
             },
             {
                 id: 7,
-                name: "Queen Idia Bronze Head",
-                monarch: "16th Century",
-                image: "images/a5.jpg",
+                name: "Calabar Carnival",
+                monarch: "Cross-river State",
+                image: "images/k3.jpeg",
                 details: [
-                    "This bronze head, created in the early sixteenth century using the lost-wax technique, portrays a young woman of the Benin court with striking realism. She wears the high pointed ukpe-okhue crown of coral beads and the distinctive “parrot’s beak” hairstyle, reserved for the Iyoba (Queen Mother) and major war chief. Inset iron bands above the eyes reference the oral tale of Idia, who became Iyoba and mother of Oba Esigie. Engraved cicatrices above the brows add symbolic detail. Commissioned by Esigie and crafted by Benin’s imperial brass-casters, the heads honored Idia's military achievements, ceremonial authority, and enduring legacy.",
+                    "The Calabar Carnival in Cross River State, famously known as “Africa’s Biggest Street Party,” is a dazzling annual celebration held every December. It attracts thousands of visitors from across Nigeria and beyond, making it a major tourism event. The carnival is marked by colorful parades, elaborate costumes, energetic dances, and thrilling boat regattas that highlight the rich culture and traditions of the people. Beyond entertainment, it serves as a platform for cultural exchange, creativity, and unity, while promoting the state’s heritage and tourism potential. The Calabar Carnival embodies joy, diversity, and pride, making it one of Africa’s most vibrant festivals.",
                     
                 ]
             },
