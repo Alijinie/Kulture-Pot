@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yoruba Kingdoms - Heritage & History</title>
+    <title>Yoruba Kingdoms</title>
     <link rel="stylesheet" href="global.css">
-    
+    <link rel="icon" type="image/png" href="/favicon.png">
     <style>
         .header {
             position: fixed;
@@ -657,7 +657,17 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
 .contact-container {
     background-image: url("images/back4.png");
     background-size: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: cover;
     
+}
+.contact-info {
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -748,6 +758,23 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     color: var(--text-primary);
 	box-shadow: 0 5px 20px rgba(153, 69, 255, 0.3);
     }
+    .footer {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+     gap: 0.5rem;
+}
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.footer-logo {
+display: flex;
+    flex-direction: column;
+    align-items: center;
+}
     </style>
     
 </head>
@@ -779,7 +806,6 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
             
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="nav-link active">Yoruba Kingdoms</a></li>
-                <li><a href="#about" class="nav-link">Introduction</a></li>
                 <li><a href="bronzes.html" class="nav-link">Regalia</a></li>
                 <li><a href="festivals.html" class="nav-link">Festivals</a></li>
             </ul>
@@ -874,7 +900,7 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
     <section class="contact-section" id="contact">
         <div class="section-header">
             <h2 class="section-title">Connect With Us</h2>
-            <p class="section-subtitle">Have information to add about Nigerian Festivals or Wildlife?</p>
+            <p class="section-subtitle">Have information to add about Nigerian Culture?</p>
         </div>
         
         <div class="contact-container">
@@ -891,29 +917,10 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
                     <div class="info-icon">📧</div>
                     <div class="info-text">
                         <h4>Email</h4>
-                        <p>contact@yorubaheritage.com</p>
+                        <p>sbagambisa@gmail.com</p>
                     </div>
                 </div>
             </div>
-            
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
         </div>
     </section>
 
@@ -927,28 +934,26 @@ url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/20
                         </div>
                     </div>
                     <span class="logo-text">
-                        <span class="prism">YORUBA</span>
-                        <span class="flux">HERITAGE</span>
+                        <span class="prism">Kulture Pot Naija</span>
+                        <span class="flux"></span>
                     </span>
                 </div>
-                <p class="footer-description">
-                    Together, these 20 prominent Yoruba kingdoms form the backbone of Yoruba civilization, ensuring that traditions endure while adapting to modern realities.
-                </p>
+                
             </div>
             
             <div class="footer-section">
                 <h4>Explore</h4>
                 <div class="footer-links">
-                    <a href="#kingdoms">Kingdoms</a>
-                    <a href="#">Festivals (Coming Soon)</a>
-                    <a href="#">Wildlife (Coming Soon)</a>
+                    <a href="index.html">Yoruba Kingdoms</a>
+                    <a href="bronzes.html">Regalia</a>
+                    <a href="festivals.html">Festivals</a>
                 </div>
             </div>
         </div>
         
         <div class="footer-bottom">
             <div class="copyright">
-                © 2025 Yoruba Heritage Project.
+                © 2025 Design by Stanley Bagambisa.  Email: sbagambisa@gmail.com
             </div>
         </div>
     </footer>
